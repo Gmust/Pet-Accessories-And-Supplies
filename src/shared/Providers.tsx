@@ -1,7 +1,8 @@
 'use client';
 
 import { CacheProvider } from '@chakra-ui/next-js';
-import { ChakraProvider, Container, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { SessionProvider } from 'next-auth/react';
 import { Rubik } from 'next/font/google';
 import React from 'react';
 
@@ -14,7 +15,7 @@ export const theme = extendTheme({
     heading: 'var(--font-rubik)',
     body: 'var(--font-rubik)',
   },
-  
+
 });
 
 const rubik = Rubik({ subsets: ['latin'] });
@@ -32,7 +33,9 @@ export const Providers = ({ children }: ProvidersProps) => {
       </style>
       <CacheProvider>
         <ChakraProvider theme={theme}>
+          <SessionProvider>
             {children}
+          </SessionProvider>
         </ChakraProvider>
       </CacheProvider>
     </>
