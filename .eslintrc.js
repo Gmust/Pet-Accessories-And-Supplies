@@ -23,8 +23,10 @@ module.exports = {
         ecmaVersion: 12,
         sourceType: "module",
     },
-    plugins: ["react"],
+    plugins: ["react","simple-import-sort"],
     rules: {
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
         // Possible errors
         "no-console": "warn",
         // Best practices
