@@ -1,0 +1,18 @@
+.container {  display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "search-area search-area search-area search-area search-area"
+    "filters goods goods goods goods"
+    "filters goods goods goods goods"
+    "filters goods goods goods goods"
+    "filters goods goods goods goods";
+}
+
+.filters { grid-area: filters; }
+
+.search-area { grid-area: search-area; }
+
+.goods { grid-area: goods; }

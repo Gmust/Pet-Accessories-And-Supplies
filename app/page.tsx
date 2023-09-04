@@ -3,7 +3,7 @@ import { PetCards } from '@/src/components/HomePage/PetCards';
 import Image from 'next/image';
 import styles from './homePage.module.css';
 
-
+0
 const Home = () => {
 
   return (
@@ -12,7 +12,7 @@ const Home = () => {
       <div className={styles.cat}>
         <div className={styles.halfEllipse}></div>
         <div className={styles.imageWrapper}>
-          <Image src={'/cat.png'} alt={'cat picture'} fill className={styles.imageWrapper} />
+          <Image src={'/cat3.png'} alt={'cat picture'} fill className={styles.imageWrapper} />
         </div>
       </div>
 
@@ -30,6 +30,10 @@ const Home = () => {
       </div>
 
       <div className={styles.btn}>
+          <div className={styles.arrow}>
+            <div className={styles.arrow__body}></div>
+          </div>
+
         <CatalogButton />
       </div>
 

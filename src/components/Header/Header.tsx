@@ -2,7 +2,7 @@
 
 
 import { Navbar } from '@/src/components/Header/Navbar';
-import { Avatar, Box, Button, Flex, Heading, useDisclosure } from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Heading, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import Link from 'next/link';
 import { MdOutlinePets } from 'react-icons/md';
 import { TfiShoppingCart } from 'react-icons/tfi';
@@ -12,7 +12,9 @@ export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
   const isAuth = false;
-
+  const [isLargerThan800] = useMediaQuery('(min-width: 800px)', {
+    fallback: false,
+  });
 
   return (
     <Flex
@@ -47,8 +49,6 @@ export const Header = () => {
             <Button colorScheme='yellow' variant='solid' marginRight={6}>
               Create Account
             </Button>
-
-
         }
         <TfiShoppingCart style={{ fontSize: '30px', cursor: 'pointer' }} />
       </Flex>
