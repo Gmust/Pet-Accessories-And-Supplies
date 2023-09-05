@@ -10,7 +10,10 @@ const nextConfig = {
             port: '1337',
             pathname: '/uploads/**'
         }]
-    }
+    },
+
 }
+
+
 
 module.exports = nextConfig

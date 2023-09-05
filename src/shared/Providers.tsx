@@ -2,7 +2,6 @@
 
 import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { SessionProvider } from 'next-auth/react';
 import { Rubik } from 'next/font/google';
 import React from 'react';
 
@@ -33,9 +32,7 @@ export const Providers = ({ children }: ProvidersProps) => {
       </style>
       <CacheProvider>
         <ChakraProvider theme={theme}>
-          <SessionProvider>
             {children}
-          </SessionProvider>
         </ChakraProvider>
       </CacheProvider>
     </>

@@ -5,7 +5,17 @@ export const goodsService = {
   async getProducts() {
     try {
       const { data } = await $unAuthHost.get<GoodsResponse>('/products?populate=coverPicture&populate=reviews');
-      return data
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  async getProductsBySearchTerm(searchTerm: string) {
+    try {
+      const { data } = await $unAuthHost.get<GoodsResponse>(
+        `/products?filters[name][$contains]=${searchTerm}&filters[brand][$contains]=${searchTerm}`,
+      );
+      return data;
     } catch (e) {
       console.log(e);
     }
