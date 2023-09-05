@@ -60,7 +60,7 @@ export const SearchBar = ({}) => {
         const options: GoodsOption[] = resp.data.map(elem => {
           return {
             label: elem.attributes.name,
-            value: elem.attributes.uuid,
+            value: elem.id.toString(),
           };
         });
         console.log(options);
@@ -73,13 +73,12 @@ export const SearchBar = ({}) => {
   }, [searchInput]);
 
   return (
-
-    <FormControl p={4}>
+    <FormControl p={4} size='md' width='4xl'>
       <Select
         isMulti
         name='colors'
         options={options}
-        placeholder='Select some colors...'
+        placeholder='Find goods...'
         closeMenuOnSelect={true}
         onInputChange={handleSearchInputChange}
       />

@@ -21,7 +21,7 @@ const ShopPage = async () => {
       <div className={styles.goods}>
         {
           goods ?
-            <ProductCards data={goods.data} />
+            <ProductCards data={goods.data}  />
             : <ProductsAlert />
         }
       </div>

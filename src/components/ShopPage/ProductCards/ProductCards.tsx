@@ -13,7 +13,7 @@ export const ProductCards = ({ data }: { data: Product[] }) => {
                                            productType={product.attributes.productType}
                                            coverPicture={product.attributes.coverPicture}
                                            reviews={product.attributes.reviews} uuid={product.attributes.uuid}
-                                           key={product.attributes.uuid}
+                                           key={product.attributes.uuid} id={product.id}
                                            price={product.attributes.price} />)
       }
     </Flex>

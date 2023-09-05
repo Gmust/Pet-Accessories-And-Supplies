@@ -1,7 +1,7 @@
 'use client';
 
-import { ProductData } from '@/types';
-import { Box, Card, CardBody, CardFooter, Flex, Heading, Stack, Text, VStack } from '@chakra-ui/react';
+import { Product, ProductData } from '@/types';
+import { Box, Card, CardBody, CardFooter, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsCurrencyDollar } from 'react-icons/bs';
@@ -15,12 +15,13 @@ export const ProductCard = ({
                               brand,
                               price,
                               uuid,
-                            }: Omit<ProductData, 'additionalInfo' | 'additionalImages' | 'description'>) => {
+                              id,
+                            }: Omit<ProductData, 'additionalInfo' | 'additionalImages' | 'description'> & Pick<Product, 'id'>) => {
 
   const summaryRating = reviews.data && reviews.data.reduce((previousValue, currentValue) => previousValue + currentValue.attributes.rating, 0) / reviews.data.length;
 
   return (
-    <Link href={`/shop/product/${uuid}`}>
+    <Link href={`/shop/product/${id}`}>
       <Card sx={{
         transition: 'transform 0.2s ease-in-out, opacity 0.2s ease-in-out',
         '&:hover': {

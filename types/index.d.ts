@@ -11,6 +11,17 @@ interface GoodsResponse {
     }
   };
 }
+interface ProductResponse {
+  data: Product;
+  meta: {
+    pagination: {
+      page: number,
+      pageSize: number,
+      pageCount: number,
+      total: number
+    }
+  } | null;
+}
 
 interface Product {
   id: number,
