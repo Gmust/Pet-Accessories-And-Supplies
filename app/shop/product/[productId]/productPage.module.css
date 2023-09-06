@@ -3,19 +3,19 @@
     display: grid;
     grid-template-columns: auto;
     background-color: #8D9AF8;
-    height: 100vh;
     justify-content: center;
-    align-content: center;
+    position: relative;
 }
 
 .container {
     display: flex;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .leftSide {
     padding: 30px;
-    display: flex;
-    position: relative;
     width: 100%;
     height: 100%;
     background-color: #E3E5FA;
@@ -26,7 +26,7 @@
 .rightSide {
     padding: 30px;
     display: flex;
-    background-color: white;
+    background-color: #FAF9F6;
     width: 100%;
     height: 100%;
     border-bottom-right-radius: 20px;
@@ -39,6 +39,16 @@
     justify-content: center;
     position: relative;
     text-align: center;
-    width: 200px;
+    width: 350px;
     height: 400px;
+}
+
+.addToCart {
+    width: 57%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    bottom: 0;
+    z-index: 100;
 }

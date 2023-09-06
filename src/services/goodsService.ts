@@ -22,7 +22,7 @@ export const goodsService = {
   },
   async getProduct(id: string) {
     try {
-      const { data } = await $unAuthHost.get<ProductResponse>(`products/${id}?populate=coverPicture&populate=reviews`);
+      const { data } = await $unAuthHost.get<ProductResponse>(`products/${id}?populate=coverPicture&populate=reviews&populate=additionalImages`);
       return data;
     } catch (e) {
       console.log(e);

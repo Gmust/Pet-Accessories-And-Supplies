@@ -1,7 +1,7 @@
 'use client';
 
 import { ProductData } from '@/types';
-import { Container, Divider, Flex, Heading, HStack, Text } from '@chakra-ui/react';
+import { Badge, Divider, Flex, Heading, HStack, Kbd, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import { FcRegisteredTrademark } from 'react-icons/fc';
@@ -17,22 +17,25 @@ export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name,
   }
 
   return (
-    <Flex flexDirection='column'>
-      <Container>
-        <Flex flexDirection='column'>
+    <Flex flexDirection='column' position='relative'>
+      <Flex flexDirection='column'>
+        <Flex justify='space-between' align='center'>
           <Flex>
             <Heading fontSize='2xl'>
               {brand}
             </Heading>
             <FcRegisteredTrademark />
           </Flex>
-          <Text fontSize='xl'>
-            {name}
+          <Text fontSize='2xl'>
+            <Kbd>{price}$</Kbd>
           </Text>
         </Flex>
-      </Container>
+        <Text fontSize='xl'>
+          {name}
+        </Text>
+      </Flex>
       <Flex mt='1' justify='space-between'>
-        <Text>{productType}</Text>
+        <Badge colorScheme='green' variant='outline'>{productType}</Badge>
         <Divider orientation='vertical' colorScheme='facebook' variant='solid' />
         <HStack spacing='2'>
           <Flex>
@@ -45,6 +48,20 @@ export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name,
           <Text>{productSummaryRating}</Text>
           <Text>({reviews.data.length} reviews)</Text>
         </HStack>
+      </Flex>
+      <Flex direction='column'>
+        <Heading size='md'>
+          Description
+        </Heading>
+        <Text width='350px' wordBreak='break-word'>
+          {description}
+        </Text>
+      </Flex>
+      <Flex direction='column'>
+        <Heading size='md'>Additional info</Heading>
+        <UnorderedList>
+          {additionalInfo.basicIngredients.map((ingredient, index) => <ListItem key={index}>{ingredient}</ListItem>)}
+        </UnorderedList>
       </Flex>
 
     </Flex>
