@@ -1,6 +1,7 @@
 'use client';
 
 import { ProductData } from '@/types';
+import { Alert, AlertIcon } from '@chakra-ui/alert';
 import { Badge, Divider, Flex, Heading, HStack, Kbd, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
@@ -40,28 +41,44 @@ export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name,
         <HStack spacing='2'>
           <Flex>
             {
-              starsArr.map((value, index) =>
-                <FaStar style={{ color: 'yellow' }} key={index} />,
-              )
+              starsArr.length ? starsArr.map((value, index) =>
+                  <FaStar style={{ color: 'yellow' }} key={index} />,
+                )
+                :
+                <>
+                  <FaStar style={{ color: 'gray' }} />
+                  <FaStar style={{ color: 'gray' }} />
+                  <FaStar style={{ color: 'gray' }} />
+                  <FaStar style={{ color: 'gray' }} />
+                  <FaStar style={{ color: 'gray' }} />
+                </>
             }
           </Flex>
-          <Text>{productSummaryRating}</Text>
+          {productSummaryRating && <Text>{productSummaryRating}</Text>}
           <Text>({reviews.data.length} reviews)</Text>
         </HStack>
       </Flex>
       <Flex direction='column'>
-        <Heading size='md'>
+        <Heading size='md' marginTop='3'>
           Description
         </Heading>
         <Text width='350px' wordBreak='break-word'>
           {description}
         </Text>
       </Flex>
-      <Flex direction='column'>
-        <Heading size='md'>Additional info</Heading>
-        <UnorderedList>
-          {additionalInfo.basicIngredients.map((ingredient, index) => <ListItem key={index}>{ingredient}</ListItem>)}
-        </UnorderedList>
+      <Flex direction='column' height='full'>
+        <Heading marginTop='3' size='md'>Additional info</Heading>
+        {
+          additionalInfo ? <UnorderedList>
+              {additionalInfo.basicIngredients.map((ingredient, index) => <ListItem key={index}>{ingredient}</ListItem>)}
+            </UnorderedList>
+            :
+            <Alert status='info' p='10' mt='5'>
+              <AlertIcon />
+              No additional data provided
+            </Alert>
+        }
+
       </Flex>
 
     </Flex>

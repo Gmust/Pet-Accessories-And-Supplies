@@ -21,7 +21,7 @@ export const Header = () => {
       align='center'
       justify='space-between'
       padding={3}
-      bg='#8D9AF8'
+      bg='#7e8adf'
       color='white'
     >
       <Link href='/'>

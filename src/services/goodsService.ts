@@ -13,7 +13,7 @@ export const goodsService = {
   async getProductsBySearchTerm(searchTerm: string) {
     try {
       const { data } = await $unAuthHost.get<GoodsResponse>(
-        `/products?filters[name][$contains]=${searchTerm}&filters[brand][$contains]=${searchTerm}`,
+        `/products?filters[name][$contains]=${searchTerm}`,
       );
       return data;
     } catch (e) {
