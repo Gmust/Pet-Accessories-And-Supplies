@@ -10,8 +10,6 @@ import styles from './productImagesSwiper.module.css';
 
 export const ProductImagesSwiper = ({ additionalImages }: Pick<ProductData, 'additionalImages'>) => {
 
-  console.log(additionalImages);
-
   const imgArr = additionalImages.data && additionalImages.data.map((img) => img.attributes.url);
 
   const settings = {

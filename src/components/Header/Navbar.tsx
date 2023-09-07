@@ -7,7 +7,8 @@ import NextLink from 'next/link';
 export const Navbar = () => {
 
   return (
-    <HStack spacing='24' as='nav'>
+    <HStack spacing='24' as='nav'
+            display={{ md: 'flex', base: 'none' }}>
       {navbarOptions.map(({ id, Icon, path, title }) =>
         <Link as={NextLink} href={path} key={id}>
           <Flex alignItems='center'>

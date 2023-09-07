@@ -69,7 +69,7 @@ export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name,
       <Flex direction='column' height='full'>
         <Heading marginTop='3' size='md'>Additional info</Heading>
         {
-          additionalInfo ? <UnorderedList>
+          additionalInfo.basicIngredients ? <UnorderedList>
               {additionalInfo.basicIngredients.map((ingredient, index) => <ListItem key={index}>{ingredient}</ListItem>)}
             </UnorderedList>
             :
@@ -78,9 +78,7 @@ export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name,
               No additional data provided
             </Alert>
         }
-
       </Flex>
-
     </Flex>
   );
 };

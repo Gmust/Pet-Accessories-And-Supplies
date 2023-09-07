@@ -1,11 +1,3 @@
 body {
     background-color: white;
 }
-
-.swiper {
-    display: grid;
-}
-
-.swiper-wrapper {
-    min-width: 0;
-}

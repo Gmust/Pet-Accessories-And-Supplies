@@ -5,7 +5,7 @@
     background-color: #8D9AF8;
     justify-content: center;
     position: relative;
-    height: 95vh;
+    height: 100%;
 }
 
 .container {
@@ -52,4 +52,25 @@
     margin-bottom: 40px;
     bottom: 0;
     z-index: 100;
+}
+
+
+@media screen and (max-width: 800px){
+    .container{
+        display: flex;
+        flex-direction: column;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .leftSide {
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+    .rightSide {
+        border-bottom-right-radius:0px;
+        border-top-right-radius: 0px;
+    }
+    .addToCart {
+        width:100%;
+    }
 }
