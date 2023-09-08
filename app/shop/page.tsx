@@ -1,3 +1,4 @@
+import { FiltersBar } from '@/src/components/ShopPage/FiltersBar/FiltersBar';
 import { ProductCards } from '@/src/components/ShopPage/ProductCards/ProductCards';
 import { ProductsAlert } from '@/src/components/ShopPage/ProductsAlert/ProductsAlert';
 import { SearchBar } from '@/src/components/ShopPage/SearchBar/SearchBar';
@@ -16,12 +17,12 @@ const ShopPage = async () => {
         <SearchBar />
       </div>
       <div className={styles.filters}>
-
+        <FiltersBar />
       </div>
       <div className={styles.goods}>
         {
           goods ?
-            <ProductCards data={goods.data}  />
+            <ProductCards data={goods.data} />
             : <ProductsAlert />
         }
       </div>

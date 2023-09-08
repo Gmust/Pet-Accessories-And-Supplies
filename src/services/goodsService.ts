@@ -4,7 +4,7 @@ import { GoodsResponse, ProductResponse } from '@/types';
 export const goodsService = {
   async getProducts() {
     try {
-      const { data } = await $unAuthHost.get<GoodsResponse>('/products?populate=coverPicture&populate=reviews');
+      const { data } = await $unAuthHost.get<GoodsResponse>('/products?populate=coverPicture&populate=reviews&populate=brand');
       return data;
     } catch (e) {
       console.log(e);
@@ -22,7 +22,9 @@ export const goodsService = {
   },
   async getProduct(id: string) {
     try {
-      const { data } = await $unAuthHost.get<ProductResponse>(`products/${id}?populate=coverPicture&populate=reviews&populate=additionalImages`);
+      const { data } = await $unAuthHost.get<ProductResponse>(
+        `products/${id}?populate=coverPicture&populate=reviews&populate=additionalImages&populate=brand`
+      );
       return data;
     } catch (e) {
       console.log(e);

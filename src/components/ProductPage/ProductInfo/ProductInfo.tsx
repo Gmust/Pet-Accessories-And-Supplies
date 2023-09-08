@@ -11,7 +11,7 @@ import { FcRegisteredTrademark } from 'react-icons/fc';
 export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name, price, description }: ProductData) => {
 
   const productSummaryRating = Math.round((reviews.data.reduce((previousValue, currentValue) => previousValue + currentValue.attributes.rating, 0) / reviews.data.length) * 10) / 10;
-
+  console.log(brand)
   const starsArr = [];
   for (let i = 0; i <= productSummaryRating; i++) {
     starsArr.push([i]);
@@ -23,7 +23,7 @@ export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name,
         <Flex justify='space-between' align='center'>
           <Flex>
             <Heading fontSize='2xl'>
-              {brand}
+              {brand.data.attributes.brand}
             </Heading>
             <FcRegisteredTrademark />
           </Flex>

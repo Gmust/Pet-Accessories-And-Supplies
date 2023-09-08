@@ -26,7 +26,7 @@ export const AddToCart = ({
         </Box>
         <Box>
           <HStack spacing='2' align='center'>
-            <Heading size='sm'>{brand}</Heading>
+            <Heading size='sm'>{brand.data.attributes.brand}</Heading>
             <Text display={{ base: 'none', md: 'inline' }}>{name}</Text>
           </HStack>
           <Badge colorScheme='green' variant='outline'>{productType}</Badge>

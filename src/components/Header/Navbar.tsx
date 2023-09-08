@@ -1,18 +1,20 @@
 'use client';
 
 import { navbarOptions } from '@/src/utils/constants';
-import { Flex, HStack, Link, Text } from '@chakra-ui/react';
+import { Flex, Link, Stack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export const Navbar = () => {
 
+  const pathname = usePathname();
+
   return (
-    <HStack spacing='24' as='nav'
-            display={{ md: 'flex', base: 'none' }}>
+    <Stack spacing={{ base: '4', md: '24' }} as='nav' direction={{ base: 'column', md: 'row' }}>
       {navbarOptions.map(({ id, Icon, path, title }) =>
         <Link as={NextLink} href={path} key={id}>
-          <Flex alignItems='center'>
-            <Text fontSize={{ base: 'xl', md: '2xl' }}>
+          <Flex alignItems='center' borderBottom={pathname === path ? '1px solid #63B3ED' : '0px'}>
+            <Text fontSize={{ base: '3xl', md: '2xl' }}>
               <Icon style={{ marginRight: '5px' }} />
             </Text>
             <Text fontSize={{ base: 'md', md: 'xl' }}>
@@ -21,7 +23,7 @@ export const Navbar = () => {
           </Flex>
         </Link>,
       )}
-    </HStack>
+    </Stack>
   );
 };
 

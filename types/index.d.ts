@@ -11,6 +11,7 @@ interface GoodsResponse {
     }
   };
 }
+
 interface ProductResponse {
   data: Product;
   meta: {
@@ -29,7 +30,9 @@ interface Product {
 }
 
 interface ProductData {
-  brand: string,
+  brand: {
+    data: BrandData
+  }
   name: string
   description: string,
   uuid: string,
@@ -75,4 +78,12 @@ interface Review {
 
 interface Reviews {
   data: Review[];
+}
+
+interface BrandData {
+  id: number,
+  attributes: {
+    UUID: string,
+    brand: string
+  }
 }

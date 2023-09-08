@@ -9,7 +9,7 @@ import { LuBird, LuFish, LuRat } from 'react-icons/lu';
 
 export const PetCards = () => {
   return (
-    <HStack width='full' align='end' justify='space-around'>
+    <HStack width='full' align='end' justify='space-around' p='2'>
       <Flex flexDirection='column' justify='center' align='unset'>
         <Text fontSize='3xl'>
           <GiCat />

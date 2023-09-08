@@ -1,3 +1,4 @@
+import { Navbar } from '@/src/components/Header/Navbar';
 import { Drawer, DrawerContent } from '@chakra-ui/modal';
 import {
   Button,
@@ -9,7 +10,7 @@ import {
   Input,
 } from '@chakra-ui/react';
 import { FocusableElement } from '@chakra-ui/utils';
-import { Ref, RefObject } from 'react';
+import { RefObject } from 'react';
 
 
 interface HeaderDrawerProps {
@@ -29,17 +30,16 @@ export const HeaderDrawer = ({ btnRef, onClose, isOpen }: HeaderDrawerProps) => 
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>Create your account</DrawerHeader>
+        <DrawerHeader>Available pages</DrawerHeader>
 
         <DrawerBody>
-          <Input placeholder='Type here...' />
+          <Navbar/>
         </DrawerBody>
 
         <DrawerFooter>
           <Button variant='outline' mr={3} onClick={onClose}>
-            Cancel
+            Close
           </Button>
-          <Button colorScheme='blue'>Save</Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -3,7 +3,7 @@
 
 import { HeaderDrawer } from '@/src/components/Header/HeaderDrawer';
 import { Navbar } from '@/src/components/Header/Navbar';
-import { Avatar, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
 import { FocusableElement } from '@chakra-ui/utils';
 import Link from 'next/link';
 import { RefObject, useRef } from 'react';
@@ -42,7 +42,9 @@ export const Header = () => {
         <HeaderDrawer isOpen={isOpen} onClose={onClose} btnRef={btnRef} />
       </Flex>
 
-      <Navbar />
+      <Box display={{base: 'none', md: 'flex'}}>
+        <Navbar />
+      </Box>
 
       <Flex alignItems='center' justifyContent='space-between'
             display={{ md: 'flex', base: 'none' }} marginRight={3}>

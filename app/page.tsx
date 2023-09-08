@@ -33,10 +33,8 @@ const Home = () => {
           <div className={styles.arrow}>
             <div className={styles.arrow__body}></div>
           </div>
-
         <CatalogButton />
       </div>
-
     </div>
   );
 };
