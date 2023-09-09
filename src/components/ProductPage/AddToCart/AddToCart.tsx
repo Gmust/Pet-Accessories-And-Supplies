@@ -1,6 +1,5 @@
 'use client';
 
-import { ProductData } from '@/types';
 import { Badge, Box, Button, Flex, Heading, HStack, Kbd, Text, useMediaQuery } from '@chakra-ui/react';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -11,12 +10,11 @@ export const AddToCart = ({
                             coverPicture,
                             name,
                             brand,
-                            productType,
-                          }: Pick<ProductData, 'coverPicture' | 'name' | 'brand' | 'productType'>) => {
+                            product_type,
+                          }: Pick<ProductData, 'coverPicture' | 'name' | 'brand' | 'product_type'>) => {
 
   const [quantity, setQuantity] = useState<number>(0);
   const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
-
   return (
     <Flex borderRadius='6px' w='90%' align='center' justify='space-between' backgroundColor='lightblue' padding='3'>
       <HStack spacing='2' alignItems='center'>
@@ -26,10 +24,10 @@ export const AddToCart = ({
         </Box>
         <Box>
           <HStack spacing='2' align='center'>
-            <Heading size='sm'>{brand.data.attributes.brand}</Heading>
+            <Heading size='sm'>{brand.data.attributes.name}</Heading>
             <Text display={{ base: 'none', md: 'inline' }}>{name}</Text>
           </HStack>
-          <Badge colorScheme='green' variant='outline'>{productType}</Badge>
+          <Badge colorScheme='green' variant='outline'>{product_type.data.attributes.name}</Badge>
         </Box>
       </HStack>
       <HStack spacing='5'>

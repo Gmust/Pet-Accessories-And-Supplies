@@ -8,6 +8,8 @@ import styles from './shopPage.module.css';
 const ShopPage = async () => {
 
   const goods = await goodsService.getProducts();
+  const brands = await goodsService.getBrands();
+  const productTypes = await goodsService.getProductTypes();
 
 
   return (
@@ -17,7 +19,7 @@ const ShopPage = async () => {
         <SearchBar />
       </div>
       <div className={styles.filters}>
-        <FiltersBar />
+        <FiltersBar brands={brands!} productTypes={productTypes!} />
       </div>
       <div className={styles.goods}>
         {
@@ -26,7 +28,6 @@ const ShopPage = async () => {
             : <ProductsAlert />
         }
       </div>
-
     </div>
   );
 

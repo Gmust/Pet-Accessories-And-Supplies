@@ -8,7 +8,7 @@ import styles from './productPage.module.css';
 const ProductPage = async ({ params }: { params: { productId: string } }) => {
   const product = await goodsService.getProduct(params.productId);
   if (!product) notFound();
-  console.log(product);
+
   return (
     <div>
       <div className={styles.productPageWrapper}>
@@ -23,7 +23,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
             <div className={styles.addToCart}>
               <AddToCart name={product.data.attributes.name} coverPicture={product.data.attributes.coverPicture}
                          brand={product.data.attributes.brand}
-                         productType={product.data.attributes.productType} />
+                         product_type={product.data.attributes.product_type} />
             </div>
           </>
         </div>

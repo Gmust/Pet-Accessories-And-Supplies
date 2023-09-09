@@ -1,5 +1,3 @@
-import { ProductType } from '@/types/enums';
-
 interface GoodsResponse {
   data: Product[];
   meta: {
@@ -36,7 +34,9 @@ interface ProductData {
   name: string
   description: string,
   uuid: string,
-  productType: ProductType,
+  product_type: {
+    data: ProductTypes
+  },
   additionalInfo: {
     basicIngredients: string[],
     weight: string
@@ -84,6 +84,38 @@ interface BrandData {
   id: number,
   attributes: {
     UUID: string,
-    brand: string
+    name: string
   }
+}
+
+interface ProductTypes {
+  id: number,
+  attributes: {
+    name: string,
+    UUID: string
+  }
+}
+
+interface BrandsResponse {
+  data: BrandData[];
+  meta: {
+    pagination: {
+      page: number,
+      pageSize: number,
+      pageCount: number,
+      total: number
+    }
+  } | null;
+}
+
+interface ProductTypesResponse {
+  data: ProductTypes[];
+  meta: {
+    pagination: {
+      page: number,
+      pageSize: number,
+      pageCount: number,
+      total: number
+    }
+  } | null;
 }

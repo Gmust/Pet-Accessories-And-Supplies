@@ -1,6 +1,5 @@
 'use client';
 
-import { Product, ProductData } from '@/types';
 import { Box, Card, CardBody, CardFooter, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,7 +7,7 @@ import { BsCurrencyDollar } from 'react-icons/bs';
 import { FaStar } from 'react-icons/fa';
 
 export const ProductCard = ({
-                              productType,
+                              product_type,
                               name,
                               reviews,
                               coverPicture,
@@ -37,7 +36,7 @@ export const ProductCard = ({
           </Box>
           <VStack align='center'>
             <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-              {brand.data.attributes.brand}
+              {brand.data.attributes.name}
             </Text>
             <Heading fontSize={'xl'} fontFamily={'body'} fontWeight={500} noOfLines={[1, 2]}>
               {name}

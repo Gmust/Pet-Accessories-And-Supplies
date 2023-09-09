@@ -1,5 +1,4 @@
 import { $unAuthHost } from '@/src/services/index';
-import { GoodsResponse, ProductResponse } from '@/types';
 
 export const goodsService = {
   async getProducts() {
@@ -23,12 +22,27 @@ export const goodsService = {
   async getProduct(id: string) {
     try {
       const { data } = await $unAuthHost.get<ProductResponse>(
-        `products/${id}?populate=coverPicture&populate=reviews&populate=additionalImages&populate=brand`
+        `products/${id}?populate=coverPicture&populate=reviews&populate=additionalImages&populate=brand&populate=product_type`,
       );
       return data;
     } catch (e) {
       console.log(e);
     }
   },
-
+  async getBrands() {
+    try {
+      const { data } = await $unAuthHost.get<BrandsResponse>(`brands`);
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  async getProductTypes() {
+    try {
+      const { data } = await $unAuthHost.get<ProductTypesResponse>(`product-types`);
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };

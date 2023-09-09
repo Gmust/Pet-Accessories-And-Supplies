@@ -1,6 +1,5 @@
 'use client';
 
-import { ProductData } from '@/types';
 import { Alert, AlertIcon } from '@chakra-ui/alert';
 import { Badge, Divider, Flex, Heading, HStack, Kbd, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import React from 'react';
@@ -8,10 +7,17 @@ import { FaStar } from 'react-icons/fa';
 import { FcRegisteredTrademark } from 'react-icons/fc';
 
 
-export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name, price, description }: ProductData) => {
+export const ProductInfo = ({
+                              product_type,
+                              reviews,
+                              additionalInfo,
+                              brand,
+                              name,
+                              price,
+                              description,
+                            }: ProductData) => {
 
   const productSummaryRating = Math.round((reviews.data.reduce((previousValue, currentValue) => previousValue + currentValue.attributes.rating, 0) / reviews.data.length) * 10) / 10;
-  console.log(brand)
   const starsArr = [];
   for (let i = 0; i <= productSummaryRating; i++) {
     starsArr.push([i]);
@@ -23,7 +29,7 @@ export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name,
         <Flex justify='space-between' align='center'>
           <Flex>
             <Heading fontSize='2xl'>
-              {brand.data.attributes.brand}
+              {brand.data.attributes.name}
             </Heading>
             <FcRegisteredTrademark />
           </Flex>
@@ -36,7 +42,7 @@ export const ProductInfo = ({ productType, reviews, additionalInfo, brand, name,
         </Text>
       </Flex>
       <Flex mt='1' justify='space-between'>
-        <Badge colorScheme='green' variant='outline'>{productType}</Badge>
+        <Badge colorScheme='green' variant='outline'>{product_type.data.attributes.name}</Badge>
         <Divider orientation='vertical' colorScheme='facebook' variant='solid' />
         <HStack spacing='2'>
           <Flex>

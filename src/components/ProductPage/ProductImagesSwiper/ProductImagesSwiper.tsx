@@ -1,5 +1,4 @@
 'use client';
-import { ProductData } from '@/types';
 import { Alert, AlertIcon } from '@chakra-ui/alert';
 import { Box, Container } from '@chakra-ui/react';
 import Image from 'next/image';
