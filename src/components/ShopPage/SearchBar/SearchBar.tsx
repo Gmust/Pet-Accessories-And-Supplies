@@ -5,7 +5,7 @@ import { GoodsOption } from '@/types/react-select';
 import { FormControl } from '@chakra-ui/react';
 import { Select } from 'chakra-react-select';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { KeyboardEventHandler, useEffect, useState } from 'react';
 
 
 export const SearchBar = ({}) => {
@@ -21,7 +21,7 @@ export const SearchBar = ({}) => {
   };
 
   const handleSearchOptionChanges = (selectedOption: Pick<GoodsOption, 'value' | 'label'>) => {
-    router.push(`/shop/product/${selectedOption.value}`);
+    router.push(`/product/${selectedOption.value}`);
   };
 
   useEffect(() => {
@@ -29,7 +29,6 @@ export const SearchBar = ({}) => {
       if (!searchInput) return;
       try {
         const resp = await goodsService.getProductsBySearchTerm(searchInput);
-        console.log(resp);
         if (!resp) return;
         const options: GoodsOption[] = resp.data.map(elem => {
           return {

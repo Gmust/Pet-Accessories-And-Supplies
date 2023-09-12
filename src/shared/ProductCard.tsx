@@ -20,14 +20,14 @@ export const ProductCard = ({
   const summaryRating = reviews.data && reviews.data.reduce((previousValue, currentValue) => previousValue + currentValue.attributes.rating, 0) / reviews.data.length;
 
   return (
-    <Link href={`/shop/product/${id}`}>
+    <Link href={`/product/${id}`}>
       <Card sx={{
         transition: 'transform 0.2s ease-in-out, opacity 0.2s ease-in-out',
         '&:hover': {
           transform: 'scale(1.05)',
           opacity: 0.7,
         },
-      }} marginTop='4' marginLeft='3' width={{ md: '245px', base: '180px' }} flexGrow={1}>
+      }} marginTop='4' marginLeft='3' width={{ md: '225px', base: '180px' }} flexGrow={1}>
         <CardBody>
           <Box rounded={'lg'} pos={'relative'} height={'150px'} m='1'>
             <Image src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${coverPicture.data.attributes.url}`}

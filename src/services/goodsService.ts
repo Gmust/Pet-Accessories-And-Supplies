@@ -45,4 +45,12 @@ export const goodsService = {
       console.log(e);
     }
   },
+  async getProductsByFilters(query: string) {
+    try {
+      const { data } = await $unAuthHost.get<ProductTypesResponse>(`/products?${query}`);
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };
