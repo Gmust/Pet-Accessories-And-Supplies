@@ -18,7 +18,7 @@ export const FilterCheckbox = ({ name, id, label, setFilterOption }: FilterCheck
     if (!checked) {
       setFilterOption((prevState) => [...prevState, `${event.target.value}`]);
     } else if (checked) {
-      setFilterOption((prevState) => prevState.filter((value) => value.slice(0, -1) !== name));
+      setFilterOption((prevState) => prevState.filter((value) => value !== name));
     }
   };
 

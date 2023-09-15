@@ -1,7 +1,6 @@
 'use client';
 
 import { FilterAccordionItem } from '@/src/components/ShopPage/FiltersBar/FilterAccordionItem';
-import { queryStringGenerator } from '@/src/utils/queryStringGenerator';
 import {
   Accordion,
   AccordionButton,
@@ -21,7 +20,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface FiltersBarProps {
   brands: BrandsResponse;
@@ -37,24 +36,26 @@ export const FiltersBar = ({ brands, productTypes }: FiltersBarProps) => {
 
   const [brandsFilterOptions, setBrandsFilterOption] = useState<string[]>([]);
   const [productTypesOptions, setProductTypesFilterOption] = useState<string[]>([]);
-  const [filtersQuert, setFiltersQuery] = useState<string>('');
   const router = useRouter();
 
   const handleUseFilters = () => {
-    // if (!filtersStr) return;
-    // router.push(`/shop/search/${filtersStr}`);
+    let query: string;
     if (brandsFilterOptions.length > 0 && productTypesOptions.length <= 0) {
-      setFiltersQuery(queryStringGenerator({ queryValues: brandsFilterOptions, customName: 'brand' }));
+      query = `brands=${brandsFilterOptions.join('.')}`;
     }
     if (brandsFilterOptions.length <= 0 && productTypesOptions.length > 0) {
-      setFiltersQuery(queryStringGenerator({ queryValues: productTypesOptions, customName: 'product_type' }));
+      query = `product_types=${productTypesOptions.join('.')}`;
     }
-    if (brandsFilterOptions && productTypesOptions) {
-      const firstPart = queryStringGenerator({ queryValues: brandsFilterOptions, customName: 'brand' });
-      const secondPart = queryStringGenerator({ queryValues: productTypesOptions, customName: 'product_type' });
-      console.log(`${firstPart}&${secondPart}`);
+    if (brandsFilterOptions.length > 0 && productTypesOptions.length > 0) {
+      const firstPart = `brands=${brandsFilterOptions.join('.')}`;
+      const secondPart = `product_types=${productTypesOptions.join('.')}`;
+      query = `${firstPart}&${secondPart}`;
     }
+    router.push(`/shop/search?${query!}`);
   };
+
+  useEffect(() => {
+  }, [brandsFilterOptions, productTypesOptions]);
 
 
   const handleMinValueChange = (val: any) => {
