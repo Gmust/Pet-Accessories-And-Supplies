@@ -13,7 +13,7 @@ const ShopLayout = async ({ children }: {
   return (
     <section className={styles.container}>
         <div className={styles.searchArea}>
-          <SearchBar />
+          <SearchBar brands={brands!} productTypes={productTypes!} />
         </div>
         <div className={styles.filters}>
           <FiltersBar brands={brands!} productTypes={productTypes!} />

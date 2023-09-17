@@ -42,3 +42,11 @@
     "goods goods "
     }
 }
+
+@media screen and (max-width: 600px) {
+
+    .filters {
+        display: none;
+    }
+
+}

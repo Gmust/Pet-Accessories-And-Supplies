@@ -1,14 +1,33 @@
 'use client';
 
+import { FiltersBar } from '@/src/components/ShopPage/FiltersBar/FiltersBar';
 import { goodsService } from '@/src/services/goodsService';
 import { GoodsOption } from '@/types/react-select';
-import { FormControl } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  FormControl,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  Portal,
+} from '@chakra-ui/react';
 import { Select } from 'chakra-react-select';
 import { useRouter } from 'next/navigation';
-import { KeyboardEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { RiFilterFill } from 'react-icons/ri';
+
+interface SearchBarProps {
+  brands: BrandsResponse;
+  productTypes: ProductTypesResponse;
+}
 
 
-export const SearchBar = ({}) => {
+export const SearchBar = ({ brands, productTypes }: SearchBarProps) => {
 
 
   const [options, setOptions] = useState<GoodsOption[]>();
@@ -45,18 +64,38 @@ export const SearchBar = ({}) => {
   }, [searchInput]);
 
   return (
-    <FormControl p={4} size='md' width='4xl'>
-      <Select
-        isMulti={false}
-        name='colors'
-        options={options}
-        placeholder='Find goods...'
-        closeMenuOnSelect={true}
-        onInputChange={handleSearchInputChange}
-        // @ts-ignore
-        onChange={handleSearchOptionChanges}
-      />
-    </FormControl>
+    <>
+      <FormControl p={4} size='md' width='4xl'>
+        <Select
+          isMulti={false}
+          name='colors'
+          options={options}
+          placeholder='Find goods...'
+          closeMenuOnSelect={true}
+          onInputChange={handleSearchInputChange}
+          // @ts-ignore
+          onChange={handleSearchOptionChanges}
+        />
+      </FormControl>
+      <Box display={{ base: 'flex', md: 'none' }}>
+        <Popover>
+          <PopoverTrigger>
+            <Button>
+              <RiFilterFill style={{fontSize: '20px'}}/>
+            </Button>
+          </PopoverTrigger>
+          <Portal>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverBody>
+                <FiltersBar brands={brands} productTypes={productTypes} />
+              </PopoverBody>
+            </PopoverContent>
+          </Portal>
+        </Popover>
+      </Box>
+    </>
   );
 };
 

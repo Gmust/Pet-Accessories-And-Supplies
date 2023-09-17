@@ -68,7 +68,7 @@ export const FiltersBar = ({ brands, productTypes }: FiltersBarProps) => {
   };
 
   return (
-    <Flex border='1px solid black' borderRadius='16px' p='4' direction='column' marginBottom='10'>
+    <Flex sx={{ border: { sm: '0px solid black', md: '1px solid black' }}} borderRadius='16px' p='4' direction='column' marginBottom='10'>
       <Heading fontSize='2xl' margin='1'>Select suitable filters</Heading>
       <Accordion allowMultiple={true}>
         <FilterAccordionItem title={'Brands'} data={brands.data} label='brand'
