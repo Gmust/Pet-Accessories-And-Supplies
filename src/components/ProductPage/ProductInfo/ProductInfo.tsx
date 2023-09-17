@@ -75,7 +75,7 @@ export const ProductInfo = ({
       <Flex direction='column' height='full'>
         <Heading marginTop='3' size='md'>Additional info</Heading>
         {
-          additionalInfo.basicIngredients ? <UnorderedList>
+          additionalInfo ? <UnorderedList>
               {additionalInfo.basicIngredients.map((ingredient, index) => <ListItem key={index}>{ingredient}</ListItem>)}
             </UnorderedList>
             :

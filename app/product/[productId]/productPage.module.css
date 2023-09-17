@@ -1,11 +1,14 @@
 
+.test{
+    background-color: #8D9AF8;
+    height: 100vh;
+}
+
 .productPageWrapper {
     display: grid;
     grid-template-columns: auto;
-    background-color: #8D9AF8;
     justify-content: center;
     position: relative;
-    height: 100%;
 }
 
 .container {

@@ -10,7 +10,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
   if (!product) notFound();
 
   return (
-    <div>
+    <div className={styles.test}>
       <div className={styles.productPageWrapper}>
         <div className={styles.container}>
           <>

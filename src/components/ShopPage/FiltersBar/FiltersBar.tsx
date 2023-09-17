@@ -39,6 +39,7 @@ export const FiltersBar = ({ brands, productTypes }: FiltersBarProps) => {
   const router = useRouter();
 
   const handleUseFilters = () => {
+
     let query: string;
     if (brandsFilterOptions.length > 0 && productTypesOptions.length <= 0) {
       query = `brands=${brandsFilterOptions.join('.')}`;
@@ -51,7 +52,7 @@ export const FiltersBar = ({ brands, productTypes }: FiltersBarProps) => {
       const secondPart = `product_types=${productTypesOptions.join('.')}`;
       query = `${firstPart}&${secondPart}`;
     }
-    router.push(`/shop/search?${query!}`);
+    router.push(`/shop/search?${query!}&price=${minValue}.${maxValue}`);
   };
 
   useEffect(() => {

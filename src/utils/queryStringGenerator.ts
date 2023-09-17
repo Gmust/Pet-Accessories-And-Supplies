@@ -6,6 +6,11 @@ interface QueryStringGeneratorParams {
   type: 'firstArg' | 'secondArg'
 }
 
+interface PriceQueryStringParams {
+  minPrice?: number | string,
+  maxPrice?: number | string
+}
+
 export const queryStringGenerator = ({ queryValues, customName, type }: QueryStringGeneratorParams) => {
 
   let query;
@@ -47,4 +52,14 @@ export const queryStringGenerator = ({ queryValues, customName, type }: QueryStr
   query = query!.replace('filters[$and][2]', 'filters[$and][1]');
   query = query!.replace('filters[$and][3]', 'filters[$and][1]');
   return query;
+};
+
+export const generatePriceQueryString = ({ minPrice, maxPrice }: PriceQueryStringParams) => {
+  return qs.stringify({
+    filters: {
+      price: {
+        [minPrice ? '$gte' : '$lte']: minPrice ? minPrice : maxPrice,
+      },
+    },
+  }, { encodeValuesOnly: true });
 };
