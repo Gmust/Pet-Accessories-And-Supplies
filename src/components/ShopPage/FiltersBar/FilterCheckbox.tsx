@@ -1,6 +1,6 @@
 import { Checkbox } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 interface FilterCheckboxProps {
   name: string,
@@ -12,7 +12,20 @@ interface FilterCheckboxProps {
 export const FilterCheckbox = ({ name, id, label, setFilterOption }: FilterCheckboxProps) => {
 
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [checked, setIsChecked] = useState<boolean>(false);
+
+
+  useEffect(() => {
+    const brands = searchParams.get('brands') && searchParams.get('brands')?.split('.');
+    const product_types = searchParams.get('product_types') && searchParams.get('brands')?.split('.');
+    if (brands && brands?.filter((item) => item === name).length > 0) {
+      setIsChecked(true);
+    }
+    if (product_types && product_types?.filter((item) => item === name).length > 0) {
+      setIsChecked(true);
+    }
+  }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!checked) {

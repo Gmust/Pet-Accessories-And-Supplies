@@ -13,8 +13,8 @@ interface SearchParams {
 
 const getGoodsByFilter = async ({ searchParams }: SearchParams) => {
   const { brands, product_types } = searchParams;
-  const brandOpts = brands.split('.');
-  const product_typesOpts = product_types.split('.');
+  const brandOpts = brands ? brands.split('.') : [];
+  const product_typesOpts = product_types ? product_types.split('.') : [];
   let query: string = '';
   if (brandOpts.length > 0 && product_typesOpts.length <= 0) {
     query = (queryStringGenerator({
@@ -23,12 +23,13 @@ const getGoodsByFilter = async ({ searchParams }: SearchParams) => {
       type: 'firstArg',
     }));
   }
-  if (brands.length <= 0 && product_typesOpts.length > 0) {
+  if (brandOpts.length <= 0 && product_typesOpts.length > 0) {
     query = (queryStringGenerator({
       queryValues: product_typesOpts,
       customName: 'product_type',
       type: 'firstArg',
     }));
+
   }
   if (brandOpts.length > 0 && product_typesOpts.length > 0) {
     const firstPart = queryStringGenerator({
@@ -56,8 +57,8 @@ const SearchPage = async ({ searchParams }: any) => {
   return (
     <>
       {
-        goods ?
-          <ProductCards data={goods.data} />
+        goods?.data.length! > 0 ?
+          <ProductCards data={goods!.data} />
           : <ProductsAlert />
       }
     </>
