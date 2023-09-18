@@ -3,9 +3,10 @@
 
 import { HeaderDrawer } from '@/src/components/Header/HeaderDrawer';
 import { Navbar } from '@/src/components/Header/Navbar';
-import { Avatar, Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Heading, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import { FocusableElement } from '@chakra-ui/utils';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { RefObject, useRef } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdOutlinePets } from 'react-icons/md';
@@ -14,6 +15,7 @@ import { TfiShoppingCart } from 'react-icons/tfi';
 export const Header = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
   const btnRef = useRef() as RefObject<FocusableElement>;
   const isAuth = false;
 
@@ -25,6 +27,7 @@ export const Header = () => {
       padding={3}
       bg='#7e8adf'
       color='white'
+      zIndex={2}
     >
       <Link href='/'>
         <Flex align='center' mr={5}>
@@ -42,7 +45,7 @@ export const Header = () => {
         <HeaderDrawer isOpen={isOpen} onClose={onClose} btnRef={btnRef} />
       </Flex>
 
-      <Box display={{base: 'none', md: 'flex'}}>
+      <Box display={{ base: 'none', md: 'flex' }}>
         <Navbar />
       </Box>
 
@@ -54,8 +57,18 @@ export const Header = () => {
               <Avatar size='sm' cursor='pointer' />
             </Flex>
             :
-            <Button colorScheme='yellow' variant='solid' marginRight={6}>
-              Create Account
+            <Button colorScheme='yellow' variant='solid' marginRight={6}
+                    onClick={() => router.push('/login')}
+            >
+              <Flex>
+                <Text>
+                  Create Account
+                </Text>
+                <Text fontWeight='bold'>/</Text>
+                <Text>
+                  Login
+                </Text>
+              </Flex>
             </Button>
         }
         <TfiShoppingCart style={{ fontSize: '30px', cursor: 'pointer' }} />
