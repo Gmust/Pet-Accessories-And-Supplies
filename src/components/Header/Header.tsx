@@ -3,8 +3,9 @@
 
 import { HeaderDrawer } from '@/src/components/Header/HeaderDrawer';
 import { Navbar } from '@/src/components/Header/Navbar';
-import { Avatar, Box, Button, Flex, Heading, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
 import { FocusableElement } from '@chakra-ui/utils';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { RefObject, useRef } from 'react';
@@ -17,8 +18,7 @@ export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const btnRef = useRef() as RefObject<FocusableElement>;
-  const isAuth = false;
-
+  const { data: session } = useSession();
 
   return (
     <Flex
@@ -52,7 +52,7 @@ export const Header = () => {
       <Flex alignItems='center' justifyContent='space-between'
             display={{ md: 'flex', base: 'none' }} marginRight={3}>
         {
-          isAuth ?
+          session ?
             <Flex flexDirection='column' marginRight={6} alignItems='center'>
               <Avatar size='sm' cursor='pointer' />
             </Flex>

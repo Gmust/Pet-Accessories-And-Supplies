@@ -1,6 +1,5 @@
 'use client';
 
-import { authService } from '@/src/services/authService';
 import { Link } from '@chakra-ui/next-js';
 import {
   Box,
@@ -20,6 +19,7 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -28,30 +28,48 @@ import { BiHide, BiShow } from 'react-icons/bi';
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
-  const { handleSubmit, register, formState: { isSubmitting, errors } } = useForm<LoginUser>({ mode: 'onBlur' });
+  const {
+    handleSubmit,
+    register,
+    formState: { isSubmitting, errors },
+    setError,
+  } = useForm<LoginUser>({ mode: 'onBlur' });
   const toast = useToast();
   const router = useRouter();
 
-  const onSubmit = async (data: LoginUser) => {
+  const onSubmit = async ({ identifier, password }: LoginUser) => {
+    if (!identifier) return setError('identifier', { type: 'required', message: 'Provide email or username' });
+    if (!password) return setError('password', { type: 'required', message: 'Provide password' });
+
     try {
-      const res = await authService.loginUser(data);
-      console.log(res);
-      toast({
-        title: 'Successfully logged in.',
-        description: 'Redirecting...',
-        status: 'success',
-        isClosable: true,
+      const result = await signIn('credentials', {
+        redirect: true,
+        identifier,
+        password,
       });
-      router.push('/shop');
+      console.log(result);
     } catch (e) {
-      toast({
-        title: 'Error',
-        description: 'Something went wrong, try again later',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
+      console.log(e);
     }
+
+    // try {
+    //   const res = await authService.loginUser(data);
+    //   toast({
+    //     title: 'Successfully logged in.',
+    //     description: 'Redirecting...',
+    //     status: 'success',
+    //     isClosable: true,
+    //   });
+    //   router.push('/shop');
+    // } catch (e) {
+    //   toast({
+    //     title: 'Error',
+    //     description: 'Something went wrong, try again later',
+    //     status: 'error',
+    //     duration: 9000,
+    //     isClosable: true,
+    //   });
+    // }
   };
 
   return (
