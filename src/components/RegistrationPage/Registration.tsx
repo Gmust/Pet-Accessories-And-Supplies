@@ -1,5 +1,7 @@
 'use client';
 
+import { authService } from '@/src/services/authService';
+import { cartService } from '@/src/services/cartService';
 import {
   Box,
   Button,
@@ -18,34 +20,51 @@ import {
   UnorderedList,
   useColorModeValue,
   useMediaQuery,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiHide, BiShow } from 'react-icons/bi';
 
-interface RegistrationInputs {
-  email: string,
-  username: string,
-  password: string
-}
-
 export const Registration = () => {
 
   const {
-    register, handleSubmit, formState: { errors, isLoading, isSubmitting },
-  } = useForm<RegistrationInputs>({ mode: 'onBlur' });
+    register, handleSubmit, formState: { errors, isLoading, isSubmitting }, reset,
+  } = useForm<RegisterUser>({ mode: 'onBlur' });
   const [showPassword, setShowPassword] = useState(false);
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
+  const toast = useToast();
 
-  const onSubmit = (data: RegistrationInputs) => {
-    console.log(data);
+  const onSubmit = async (data: RegisterUser) => {
+    try {
+      const res = await authService.registerUser(data)
+        .then(async ({ id }) => await cartService.createCart(id))
+        .catch((err) => console.log(err));
+      toast({
+        title: 'Account created.',
+        description: 'We\'ve created your account for you.',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      reset();
+    } catch (e) {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong, try again later',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
     <Flex
       align={'center'}
       justify={'center'}
+      height='100vh'
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Box

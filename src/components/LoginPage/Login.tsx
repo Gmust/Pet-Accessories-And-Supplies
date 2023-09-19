@@ -1,5 +1,7 @@
 'use client';
 
+import { authService } from '@/src/services/authService';
+import { Link } from '@chakra-ui/next-js';
 import {
   Box,
   Button,
@@ -8,36 +10,55 @@ import {
   FormErrorMessage,
   FormLabel,
   Heading,
-  Input, InputGroup, InputRightElement,
-  Link, ListItem,
+  Input,
+  InputGroup,
+  InputRightElement,
   Stack,
-  Text, UnorderedList,
+  Text,
   useColorModeValue,
   useMediaQuery,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiHide, BiShow } from 'react-icons/bi';
 
-interface LoginInputs {
-  email: string,
-  password: string
-}
-
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
-  const { handleSubmit, register, formState: { isSubmitting, errors } } = useForm<LoginInputs>({ mode: 'onBlur' });
+  const { handleSubmit, register, formState: { isSubmitting, errors } } = useForm<LoginUser>({ mode: 'onBlur' });
+  const toast = useToast();
+  const router = useRouter();
 
-  const onSubmit = (data: LoginInputs) => {
-    console.log(data);
+  const onSubmit = async (data: LoginUser) => {
+    try {
+      const res = await authService.loginUser(data);
+      console.log(res);
+      toast({
+        title: 'Successfully logged in.',
+        description: 'Redirecting...',
+        status: 'success',
+        isClosable: true,
+      });
+      router.push('/shop');
+    } catch (e) {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong, try again later',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
     <Flex
       align={'center'}
       justify={'center'}
+      height='100vh'
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Box
@@ -47,24 +68,22 @@ export const Login = () => {
           boxShadow={'lg'}
           p={8}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
-            Sign up
+            Sign in
           </Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
             <VStack>
-              <FormControl isInvalid={!!errors.email}>
-                <FormLabel htmlFor='email'>Email</FormLabel>
+              <FormControl isInvalid={!!errors.identifier}>
+                <FormLabel htmlFor='identifier'>Email of Username</FormLabel>
                 <Input
-                  id='email'
-                  placeholder='example@gmail.com'
-                  {...register('email', {
-                    required: 'Email is required',
+                  id='identifier'
+                  placeholder='example@gmail.com or coolUsername'
+                  {...register('identifier', {
+                    required: 'Identifier is required',
                     minLength: { value: 4, message: 'Minimum length should be 4' },
-                    pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                   })}
                 />
                 <FormErrorMessage>
-                  {errors.email && errors.email.message}
-                  {errors.email?.type === 'pattern' && 'Invalid email'}
+                  {errors.identifier && errors.identifier.message}
                 </FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.password}>
@@ -99,7 +118,7 @@ export const Login = () => {
           </form>
           <Stack pt={6}>
             <Text align={'center'}>
-              Already have an account? <Link href='/login' color={'blue.400'}>Sign in</Link>
+              Already have an account? <Link href='/registration' color={'blue.400'}>Sign in</Link>
             </Text>
           </Stack>
         </Box>

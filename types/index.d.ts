@@ -119,3 +119,10 @@ interface ProductTypesResponse {
     }
   } | null;
 }
+
+interface Cart {
+  id: number,
+  createdAt: Date,
+  updatedAt: Date,
+  products: ProductData[]
+}
