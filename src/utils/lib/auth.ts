@@ -24,12 +24,17 @@ export const authOptions: AuthOptions = {
             password: credentials.password,
           });
 
-          return {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            jwt: jwt,
-          };
+          if (user) {
+            return {
+              id: user.id,
+              username: user.username,
+              email: user.email,
+              jwt: jwt,
+            };
+          } else {
+            return null;
+          }
+
         } catch (error) {
           console.log(error);
         }
@@ -40,7 +45,7 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
 
       const isSignIn = user ? true : false;
-      if(isSignIn) {
+      if (isSignIn) {
         token.id = Number(user.id!);
         token.jwt = user.jwt!;
         token.username = user.username;

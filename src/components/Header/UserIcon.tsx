@@ -1,5 +1,6 @@
 import { Menu, MenuButton, MenuGroup, MenuItem, MenuList } from '@chakra-ui/menu';
 import { IconButton } from '@chakra-ui/react';
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { RxAvatar } from 'react-icons/rx';
 
@@ -25,7 +26,10 @@ export const UserIcon = ({ email, id }: UserIcon) => {
           <MenuItem onClick={() => router.push(`/user/${id}`)}>My account</MenuItem>
           <MenuItem onClick={() => router.push(`/user/${id}/orders`)}>My orders</MenuItem>
         </MenuGroup>
-        <MenuItem>
+        <MenuItem onClick={() => {
+          signOut();
+          router.refresh();
+        }}>
           Sign out
         </MenuItem>
       </MenuList>
