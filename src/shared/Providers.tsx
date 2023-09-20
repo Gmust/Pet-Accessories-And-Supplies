@@ -1,5 +1,6 @@
 'use client';
 
+import { menuTheme } from '@/src/shared/chakraMenuTheme';
 import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { SessionProvider } from 'next-auth/react';
@@ -15,8 +16,11 @@ export const theme = extendTheme({
     heading: 'var(--font-rubik)',
     body: 'var(--font-rubik)',
   },
-
+  components: {
+    Menu: menuTheme,
+  },
 });
+
 
 const rubik = Rubik({ subsets: ['latin'] });
 

@@ -46,30 +46,26 @@ export const Login = () => {
         redirect: true,
         identifier,
         password,
+      }).catch((e) => {
       });
-      console.log(result);
+      if (result?.status! === 401) {
+        toast({
+          title: 'Error',
+          description: 'Invalid credentials',
+          status: 'error',
+        });
+        return;
+      } else {
+        toast({
+          title: 'Success',
+          description: 'Successfully logged in',
+          status: 'success',
+        });
+        router.push('/shop');
+      }
     } catch (e) {
       console.log(e);
     }
-
-    // try {
-    //   const res = await authService.loginUser(data);
-    //   toast({
-    //     title: 'Successfully logged in.',
-    //     description: 'Redirecting...',
-    //     status: 'success',
-    //     isClosable: true,
-    //   });
-    //   router.push('/shop');
-    // } catch (e) {
-    //   toast({
-    //     title: 'Error',
-    //     description: 'Something went wrong, try again later',
-    //     status: 'error',
-    //     duration: 9000,
-    //     isClosable: true,
-    //   });
-    // }
   };
 
   return (

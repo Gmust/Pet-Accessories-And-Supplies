@@ -24,7 +24,12 @@ export const authOptions: AuthOptions = {
             password: credentials.password,
           });
 
-          return { ...user, jwt };
+          return {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            jwt: jwt,
+          };
         } catch (error) {
           console.log(error);
         }
@@ -32,35 +37,27 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ user, token }) {
-      // @ts-ignore
-      const dbUser = await authService.getUser(user.jwt) as User;
-      if (!dbUser) {
-        token.id = Number(user.id);
+    async jwt({ token, user }) {
+
+      const isSignIn = user ? true : false;
+      if(isSignIn) {
+        token.id = Number(user.id!);
+        token.jwt = user.jwt!;
+        token.username = user.username;
+        token.email = user.email;
       }
-      return {
-        id: dbUser.id,
-        username: dbUser.username,
-        email: dbUser.email,
-        cart: dbUser.cart,
-        reviews: dbUser.reviews,
-      };
+
+      return Promise.resolve(token);
     },
     async session({ session, token }) {
 
-      if (session && token) {
-        // @ts-ignore
+      if (token && session.user) {
         session.user.id = token.id;
-        // @ts-ignore
-        session.user.username = token.username;
-        // @ts-ignore
-        session.user.email = token.email;
-        // @ts-ignore
-        session.user.cart = token.cart;
-        // @ts-ignore
-        session.user.reviews = token.reviews;
+        session.user.name = token.name;
+        session.user.email = token.email!;
       }
-      return session;
+
+      return Promise.resolve(session);
     },
     redirect() {
       return '/shop';

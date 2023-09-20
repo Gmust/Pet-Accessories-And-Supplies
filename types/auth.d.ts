@@ -23,5 +23,6 @@ interface User {
   email: string
   updatedAt: Date,
   reviews: [],
-  cart: Cart
+  cart: Cart,
+  jwt?: string
 }

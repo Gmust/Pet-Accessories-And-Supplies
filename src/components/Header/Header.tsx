@@ -3,12 +3,13 @@
 
 import { HeaderDrawer } from '@/src/components/Header/HeaderDrawer';
 import { Navbar } from '@/src/components/Header/Navbar';
-import { Avatar, Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
+import { UserIcon } from '@/src/components/Header/UserIcon';
+import { Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
 import { FocusableElement } from '@chakra-ui/utils';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { RefObject, useRef } from 'react';
+import React, { RefObject, useRef } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdOutlinePets } from 'react-icons/md';
 import { TfiShoppingCart } from 'react-icons/tfi';
@@ -19,7 +20,7 @@ export const Header = () => {
   const router = useRouter();
   const btnRef = useRef() as RefObject<FocusableElement>;
   const { data: session } = useSession();
-
+  console.log(session);
   return (
     <Flex
       align='center'
@@ -54,7 +55,7 @@ export const Header = () => {
         {
           session ?
             <Flex flexDirection='column' marginRight={6} alignItems='center'>
-              <Avatar size='sm' cursor='pointer' />
+              <UserIcon id={session.user.id} email={session.user.email} />
             </Flex>
             :
             <Button colorScheme='yellow' variant='solid' marginRight={6}
