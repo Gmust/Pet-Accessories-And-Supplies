@@ -20,7 +20,8 @@ export const Header = () => {
   const router = useRouter();
   const btnRef = useRef() as RefObject<FocusableElement>;
   const { data: session } = useSession();
-  console.log(session);
+
+
   return (
     <Flex
       align='center'

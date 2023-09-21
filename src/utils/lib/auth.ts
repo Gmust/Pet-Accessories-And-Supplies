@@ -23,7 +23,6 @@ export const authOptions: AuthOptions = {
             identifier: credentials.identifier,
             password: credentials.password,
           });
-
           if (user) {
             return {
               id: user.id,
@@ -34,7 +33,6 @@ export const authOptions: AuthOptions = {
           } else {
             return null;
           }
-
         } catch (error) {
           console.log(error);
         }
@@ -43,7 +41,6 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-
       const isSignIn = user ? true : false;
       if (isSignIn) {
         token.id = Number(user.id!);
@@ -55,11 +52,12 @@ export const authOptions: AuthOptions = {
       return Promise.resolve(token);
     },
     async session({ session, token }) {
-
       if (token && session.user) {
         session.user.id = token.id;
-        session.user.name = token.name;
+        // @ts-ignore
+        session.user.username = token.username;
         session.user.email = token.email!;
+        session.user.jwt = token.jwt;
       }
 
       return Promise.resolve(session);

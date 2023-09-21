@@ -15,7 +15,7 @@ export const authService = {
     return data;
   },
   async getUser(jwt: string) {
-    const { data } = await $authHost.get<User>('users/me?populate=deep', {
+    const { data } = await $authHost.get<User>('users/me?populate[orders]=deep', {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },

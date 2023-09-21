@@ -9,7 +9,7 @@ interface LoginUser {
   password: string
 }
 
-interface  AuthResponse {
+interface AuthResponse {
   jwt: string,
   user: User
 }
@@ -25,4 +25,6 @@ interface User {
   reviews: [],
   cart: Cart,
   jwt?: string
+  orders: Order[]
 }
+

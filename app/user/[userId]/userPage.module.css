@@ -1,0 +1,25 @@
+
+.userPageWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    "account-info account-info orders-list orders-list orders-list"
+    "account-info account-info orders-list orders-list orders-list"
+    "account-info account-info orders-list orders-list orders-list"
+    "account-info account-info orders-list orders-list orders-list";
+}
+
+
+.accountInfo {
+    grid-area: account-info;
+}
+
+.ordersList {
+    grid-area: orders-list;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-top: 5%;
+}

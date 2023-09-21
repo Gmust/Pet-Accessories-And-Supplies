@@ -1,5 +1,6 @@
 'use client';
 
+import { Product, ProductData } from '@/types';
 import { Box, Card, CardBody, CardFooter, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';

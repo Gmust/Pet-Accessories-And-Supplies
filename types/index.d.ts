@@ -111,12 +111,7 @@ interface BrandsResponse {
 interface ProductTypesResponse {
   data: ProductTypes[];
   meta: {
-    pagination: {
-      page: number,
-      pageSize: number,
-      pageCount: number,
-      total: number
-    }
+    pagination: Pagination
   } | null;
 }
 
@@ -124,5 +119,35 @@ interface Cart {
   id: number,
   createdAt: Date,
   updatedAt: Date,
-  products: ProductData[]
+  products: Product[]
+}
+
+export interface Pagination {
+  page:      number;
+  pageSize:  number;
+  pageCount: number;
+  total:     number;
+}
+
+
+interface Order {
+  address: string,
+  city: string,
+  country: string,
+  amount: number
+  confirmed: boolean,
+  products: GoodsResponse
+  totalPrice: number
+}
+
+interface OrdersResponse {
+  data: OrderData[];
+  meta: {
+    pagination: Pagination
+  };
+}
+
+interface OrderData {
+  id: number,
+  attributes: Order
 }
