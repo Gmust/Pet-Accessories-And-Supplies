@@ -8,7 +8,7 @@ import { Table, TableContainer, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
 export const OrdersList = ({ data, meta }: OrdersResponse) => {
   return (
     <TableContainer>
-      <Table variant='simple' colorScheme='telegram'>
+      <Table variant='striped' colorScheme='telegram'>
         <Thead>
           <Tr>
             <Th>Address</Th>

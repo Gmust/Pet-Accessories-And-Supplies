@@ -14,6 +14,13 @@ export const ordersService = {
     } catch (e) {
       console.log(e);
     }
-
+  },
+  async cancelOrder(jwt: string, orderId: number) {
+    const response = await $authHost.delete(`orders/${orderId}`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+    return response;
   },
 };

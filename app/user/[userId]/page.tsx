@@ -1,4 +1,5 @@
 import { AccountInfo } from '@/src/components/UserPage/AccountInfo';
+import { NoOrders } from '@/src/components/UserPage/OrdersList/NoOrders';
 import { OrdersList } from '@/src/components/UserPage/OrdersList/OrdersList';
 import { authService } from '@/src/services/authService';
 import { ordersService } from '@/src/services/ordersService';
@@ -25,7 +26,9 @@ const UserPage = async ({ params }: { params: { slug: string } }) => {
           ordersResponse?.data.length! > 0 ?
             <OrdersList data={ordersResponse?.data!} meta={ordersResponse?.meta!} />
             :
-            <div>no orders</div>
+            <div>
+              <NoOrders />
+            </div>
         }
       </div>
     </div>
