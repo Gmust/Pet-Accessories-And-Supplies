@@ -26,7 +26,7 @@ const UserPage = async ({ params }: { params: { slug: string } }) => {
           ordersResponse?.data.length! > 0 ?
             <OrdersList data={ordersResponse?.data!} meta={ordersResponse?.meta!} />
             :
-            <div>
+            <div className={styles.orderAlert}>
               <NoOrders />
             </div>
         }

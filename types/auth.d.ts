@@ -1,3 +1,5 @@
+import { Cart, Order } from '@/types/index';
+
 interface RegisterUser {
   email: string,
   username: string,
@@ -23,8 +25,8 @@ interface User {
   email: string
   updatedAt: Date,
   reviews: [],
-  cart: Cart,
+  cart?: Cart,
   jwt?: string
-  orders: Order[]
+  orders?: Order[]
 }
 

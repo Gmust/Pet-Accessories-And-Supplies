@@ -123,10 +123,10 @@ interface Cart {
 }
 
 export interface Pagination {
-  page:      number;
-  pageSize:  number;
+  page: number;
+  pageSize: number;
   pageCount: number;
-  total:     number;
+  total: number;
 }
 
 
@@ -151,3 +151,31 @@ interface OrderData {
   id: number,
   attributes: Order
 }
+
+interface CartResponse {
+  data: {
+    id: number,
+    attributes: {
+      uuid: string,
+      products: {
+        data: Product[]
+      }
+    }
+  };
+  meta: {
+    pagination: Pagination
+  };
+}
+
+
+interface Cart {
+  id: number,
+  uuid: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  products: {
+    data: ProductData[]
+  }
+}
+

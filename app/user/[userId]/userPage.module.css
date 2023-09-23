@@ -21,3 +21,8 @@
     display: flex;
     margin-top: 5%;
 }
+
+
+.orderAlert {
+    width: 100vw;
+}

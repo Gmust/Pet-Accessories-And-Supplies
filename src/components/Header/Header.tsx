@@ -1,10 +1,21 @@
 'use client';
 
 
+import { Cart } from '@/src/components/Header/Cart';
 import { HeaderDrawer } from '@/src/components/Header/HeaderDrawer';
 import { Navbar } from '@/src/components/Header/Navbar';
 import { UserIcon } from '@/src/components/Header/UserIcon';
-import { Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { FocusableElement } from '@chakra-ui/utils';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -73,7 +84,19 @@ export const Header = () => {
               </Flex>
             </Button>
         }
-        <TfiShoppingCart style={{ fontSize: '30px', cursor: 'pointer' }} />
+        <Popover placement='bottom' >
+          <PopoverTrigger>
+            <TfiShoppingCart style={{ fontSize: '30px', cursor: 'pointer' }}  />
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverHeader fontWeight='semibold'>User cart</PopoverHeader>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverBody>
+              <Cart/>
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
       </Flex>
     </Flex>
   );
