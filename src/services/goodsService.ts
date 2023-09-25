@@ -1,4 +1,5 @@
 import { $unAuthHost } from '@/src/services/index';
+import { BrandsResponse, GoodsResponse, ProductResponse, ProductTypesResponse } from '@/types';
 
 export const goodsService = {
   async getProducts() {

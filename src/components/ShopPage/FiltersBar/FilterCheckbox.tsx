@@ -17,8 +17,8 @@ export const FilterCheckbox = ({ name, id, label, setFilterOption }: FilterCheck
 
 
   useEffect(() => {
-    const brands = searchParams.get('brands') && searchParams.get('brands')?.split('.');
-    const product_types = searchParams.get('product_types') && searchParams.get('brands')?.split('.');
+    const brands = searchParams?.get('brands') && searchParams.get('brands')?.split('.');
+    const product_types = searchParams?.get('product_types') && searchParams.get('brands')?.split('.');
     if (brands && brands?.filter((item) => item === name).length > 0) {
       setIsChecked(true);
     }

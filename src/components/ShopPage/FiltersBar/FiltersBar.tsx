@@ -1,6 +1,7 @@
 'use client';
 
 import { FilterAccordionItem } from '@/src/components/ShopPage/FiltersBar/FilterAccordionItem';
+import { BrandsResponse, ProductTypesResponse } from '@/types';
 import {
   Accordion,
   AccordionButton,

@@ -21,9 +21,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
               <ProductInfo {...product!.data.attributes} />
             </div>
             <div className={styles.addToCart}>
-              <AddToCart name={product.data.attributes.name} coverPicture={product.data.attributes.coverPicture}
-                         brand={product.data.attributes.brand}
-                         product_type={product.data.attributes.product_type} />
+              <AddToCart id={product.data.id} attributes={product.data.attributes} />
             </div>
           </>
         </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import { CartProvider } from '@/context';
 import { menuTheme } from '@/src/shared/chakraMenuTheme';
 import { kbdTheme } from '@/src/shared/kdbChakraTheme';
 import { CacheProvider } from '@chakra-ui/next-js';
@@ -41,11 +42,13 @@ export const Providers = ({ children }: ProvidersProps) => {
         `}
       </style>
       <SessionProvider>
-        <CacheProvider>
-          <ChakraProvider theme={theme}>
-            {children}
-          </ChakraProvider>
-        </CacheProvider>
+        <CartProvider>
+          <CacheProvider>
+            <ChakraProvider theme={theme}>
+              {children}
+            </ChakraProvider>
+          </CacheProvider>
+        </CartProvider>
       </SessionProvider>
     </>
   );

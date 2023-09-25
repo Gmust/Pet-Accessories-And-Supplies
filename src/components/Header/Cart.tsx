@@ -1,11 +1,12 @@
 'use client';
 
+import { CartContext } from '@/context';
 import { ProductCartContent } from '@/src/components/Cart/ProductCartContent';
 import { cartService } from '@/src/services/cartService';
 import { CartResponse } from '@/types';
 import { Box, CircularProgress } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 interface CartParams {
 
@@ -13,9 +14,9 @@ interface CartParams {
 
 export const Cart = ({}: CartParams) => {
 
-  const [cart, setCart] = useState<CartResponse | null>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { data: session } = useSession();
+  const { setCart, cart } = useContext(CartContext);
 
   useEffect(() => {
     if (session) {
