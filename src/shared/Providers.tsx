@@ -1,8 +1,9 @@
 'use client';
 
 import { menuTheme } from '@/src/shared/chakraMenuTheme';
+import { kbdTheme } from '@/src/shared/kdbChakraTheme';
 import { CacheProvider } from '@chakra-ui/next-js';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider, defineStyle, defineStyleConfig, extendTheme } from '@chakra-ui/react';
 import { SessionProvider } from 'next-auth/react';
 import { Rubik } from 'next/font/google';
 import React from 'react';
@@ -18,8 +19,12 @@ export const theme = extendTheme({
   },
   components: {
     Menu: menuTheme,
+    Kbd: kbdTheme
   },
 });
+
+
+
 
 
 const rubik = Rubik({ subsets: ['latin'] });

@@ -10,8 +10,11 @@ import {
   Button,
   Flex,
   Heading,
-  Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent,
-  PopoverHeader,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
   PopoverTrigger,
   Text,
   useDisclosure,
@@ -84,16 +87,17 @@ export const Header = () => {
               </Flex>
             </Button>
         }
-        <Popover placement='bottom' >
+        <Popover>
           <PopoverTrigger>
-            <TfiShoppingCart style={{ fontSize: '30px', cursor: 'pointer' }}  />
+            <Button variant='unstyled'>
+              <TfiShoppingCart style={{ fontSize: '30px', cursor: 'pointer' }} />
+            </Button>
           </PopoverTrigger>
           <PopoverContent>
-            <PopoverHeader fontWeight='semibold'>User cart</PopoverHeader>
             <PopoverArrow />
             <PopoverCloseButton />
-            <PopoverBody>
-              <Cart/>
+            <PopoverBody  maxHeight='500px' overflow='auto'>
+              <Cart />
             </PopoverBody>
           </PopoverContent>
         </Popover>
