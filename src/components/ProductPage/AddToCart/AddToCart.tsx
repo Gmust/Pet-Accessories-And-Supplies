@@ -3,7 +3,19 @@
 import { CartContext } from '@/context';
 import { cartService } from '@/src/services/cartService';
 import { Product } from '@/types';
-import { Badge, Box, Button, Flex, Heading, HStack, Progress, Text, useMediaQuery, useToast } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Progress,
+  Text,
+  useDisclosure,
+  useMediaQuery,
+  useToast,
+} from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useContext } from 'react';
@@ -128,7 +140,6 @@ export const AddToCart = ({ id, attributes }: Product) => {
             :
             <Progress size='xs' isIndeterminate />
         }
-
       </HStack>
     </Flex>
   );

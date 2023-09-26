@@ -1,0 +1,8 @@
+
+.orderPageWrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 90vh;
+    width: 98vw;
+}

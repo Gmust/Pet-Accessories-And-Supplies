@@ -1,6 +1,6 @@
 interface GoodsResponse {
   data: Product[];
-  meta: {
+  meta?: {
     pagination: {
       page: number,
       pageSize: number,
