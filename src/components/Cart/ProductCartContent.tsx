@@ -20,7 +20,7 @@ export const ProductCartContent = ({ cart }: ProductCartProps) => {
     <VStack spacing='4'>
       <Box>
         {
-          cart ? cart?.data.attributes.products.data.map((item) =>
+          cart.data.attributes.products.data.length > 0 ? cart?.data.attributes.products.data.map((item) =>
               <ProductCartItem item={item} key={item.id} />,
             )
             :
@@ -32,9 +32,9 @@ export const ProductCartContent = ({ cart }: ProductCartProps) => {
       </Box>
       <Flex w='full' flexDirection='row' align='center' justify='space-between' py='2'>
         <Text color='black' fontSize='xl'>Total price:</Text>
-        <Text color='black' fontSize='xl'>{totalPrice}$</Text>
+        <Text color='black' fontSize='xl'>{totalPrice.toFixed(2)}$</Text>
       </Flex>
-      <Button colorScheme='yellow' w='full'>
+      <Button colorScheme='yellow' w='full' isDisabled={!(cart.data.attributes.products.data.length > 0)}>
         Confirm Order
       </Button>
     </VStack>

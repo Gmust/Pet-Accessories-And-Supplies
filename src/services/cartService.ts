@@ -1,5 +1,5 @@
 import { $authHost } from '@/src/services/index';
-import { CartResponse } from '@/types';
+import { CartResponse, Product } from '@/types';
 import { User } from '@/types/auth';
 
 export const cartService = {
@@ -26,5 +26,16 @@ export const cartService = {
       },
     });
     return data;
+  },
+  async updateCartProducts(jwt: string, cartItems: number[], cartId: number) {
+    const { data } = await $authHost.put<CartResponse>(`carts/${cartId}?populate=deep,3`, {
+      data: {
+        products: cartItems,
+      },
+    }, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
   },
 };
