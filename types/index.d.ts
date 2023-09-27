@@ -179,3 +179,7 @@ interface Cart {
   }
 }
 
+interface CreatedOrderResponse {
+  data: OrderData,
+  meta: {}
+}

@@ -2,6 +2,7 @@
 
 import { authService } from '@/src/services/authService';
 import { cartService } from '@/src/services/cartService';
+import { RegisterUser } from '@/types/auth';
 import {
   Box,
   Button,

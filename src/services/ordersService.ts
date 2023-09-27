@@ -1,6 +1,12 @@
 import { $authHost } from '@/src/services/index';
-import { OrdersResponse } from '@/types';
+import { CreatedOrderResponse, Order, OrdersResponse } from '@/types';
 
+
+interface CreateOrderParams {
+  jwt: string,
+  userId: number
+  order: Order
+}
 
 export const ordersService = {
   async getOrders(jwt: string) {
@@ -22,5 +28,23 @@ export const ordersService = {
       },
     });
     return response;
+  },
+  async createOrder({ order, userId, jwt }: CreateOrderParams) {
+    const { data } = await $authHost.post<CreatedOrderResponse>(`orders`, {
+      data: {
+        user: userId,
+        products: order.products,
+        address: order.address,
+        city: order.city,
+        country: order.country,
+        totalPrice: order.totalPrice,
+        amount: order.amount,
+      },
+    }, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+    return data;
   },
 };

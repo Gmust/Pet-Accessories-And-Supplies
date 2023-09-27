@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link'
 import { BsCurrencyDollar } from 'react-icons/bs';
 
-export const SmallProductCard = ({
+export const  SmallProductCard = ({
                                    product_type,
                                    name,
                                    reviews,
@@ -28,7 +28,7 @@ export const SmallProductCard = ({
           />
           <Flex flexDirection='column' alignItems='flex-start' marginLeft='4'>
             <Heading fontSize='md'>{brand.data.attributes.name}</Heading>
-            <Text>{name}</Text>
+            <Text noOfLines={1}>{name}</Text>
             <Flex align='center'>
               <Text fontWeight={800} fontSize={'md'}>
                 {price}

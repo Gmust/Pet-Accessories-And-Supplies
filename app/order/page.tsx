@@ -4,14 +4,14 @@ import { getServerSession } from 'next-auth';
 import { notFound } from 'next/navigation';
 import styles from './orderPage.module.css';
 
-const OrderPage = () => {
+const OrderPage =async () => {
 
-  const session = getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   if (!session) notFound();
 
   return (
     <div className={styles.orderPageWrapper}>
-      <OrderForm />
+      <OrderForm session={session} />
     </div>
   );
 };
