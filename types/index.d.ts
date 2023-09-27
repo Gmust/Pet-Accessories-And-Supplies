@@ -51,7 +51,8 @@ interface ProductData {
     data: AdditionalImages[]
   },
   reviews: Reviews,
-  price: number
+  price: number,
+  stripeId: string
 }
 
 interface Image {

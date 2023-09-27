@@ -19,6 +19,7 @@ import {
   Stack,
   VStack,
 } from '@chakra-ui/react';
+import { loadStripe } from '@stripe/stripe-js';
 import { Session } from 'next-auth';
 import { redirect, useRouter } from 'next/navigation';
 import { useContext, useState } from 'react';
@@ -27,7 +28,7 @@ import { BsSignpost2 } from 'react-icons/bs';
 import { GiCornerFlag } from 'react-icons/gi';
 import { LiaCitySolid } from 'react-icons/lia';
 
-
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY!);
 type OrderFormInputs = Pick<Order, 'country' | 'city' | 'address'>
 
 export const OrderForm = ({ session }: { session: Session }) => {
@@ -37,7 +38,12 @@ export const OrderForm = ({ session }: { session: Session }) => {
   if (!order) redirect('/shop');
   const { handleSubmit, register, setError, formState: { errors } } = useForm<OrderFormInputs>({ mode: 'onBlur' });
   const router = useRouter();
-
+  console.log(cart?.data.attributes.products.data.map((item) => {
+    return {
+      price: item.attributes.stripeId,
+      quantity: 1,
+    };
+  }),)
   const onSubmit = async ({ city, country, address }: OrderFormInputs) => {
     setIsLoading(true);
     try {
@@ -55,7 +61,22 @@ export const OrderForm = ({ session }: { session: Session }) => {
         },
       });
       await cartService.updateCartProducts(session.user.jwt!, [], cart?.data.id!);
-      router.push(`order/confirm?userId=${session.user.id}`);
+
+      // router.push(`order/confirm?userId=${session.user.id}`);
+      const stripe = await stripePromise;
+      // @ts-ignore
+      const { error } = await stripe?.redirectToCheckout({
+        lineItems: cart?.data.attributes.products.data.map((item) => {
+          return {
+            price: item.attributes.stripeId,
+            quantity: 1,
+          };
+        }),
+        mode: 'payment',
+        successUrl: `http://localhost:3000/order/confirm?${session.user.id}`,
+        cancelUrl: 'https://example.com/cancel',
+      });
+      console.log('----=================------------============', error);
     } catch (e) {
       console.log(e);
     } finally {
