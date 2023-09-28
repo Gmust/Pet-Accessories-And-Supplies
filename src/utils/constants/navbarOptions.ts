@@ -1,4 +1,5 @@
 import { IconType } from 'react-icons';
+import { BiSolidUser } from 'react-icons/bi';
 import { FcAbout, FcShop } from 'react-icons/fc';
 
 interface NavbarOption {

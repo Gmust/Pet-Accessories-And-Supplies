@@ -15,7 +15,7 @@ export const OrderInfo = ({ amount, totalPrice }: OrderInfoProps) => {
       </Flex>
       <Flex mt='4'>
         <Heading fontSize='xl'>Total price:</Heading>
-        <Kbd size='xl' ml='5'>{totalPrice}$</Kbd>
+        <Kbd size='xl' ml='5'>{totalPrice.toFixed(2)}$</Kbd>
       </Flex>
     </Flex>
   );

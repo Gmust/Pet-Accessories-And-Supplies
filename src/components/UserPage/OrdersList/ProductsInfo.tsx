@@ -13,7 +13,8 @@ export const ProductsInfo = ({ products }: ProductsInfoProps) => {
                           name={product.attributes.name} brand={product.attributes.brand}
                           coverPicture={product.attributes.coverPicture}
                           price={product.attributes.price}
-                          reviews={product.attributes.reviews} />)}
+                          reviews={product.attributes.reviews} key={product.id}
+                          stripeId={product.attributes.stripeId} />)}
     </>
   );
 };

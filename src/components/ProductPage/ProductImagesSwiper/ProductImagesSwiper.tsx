@@ -1,13 +1,18 @@
 'use client';
+import { ProductData } from '@/types';
 import { Alert, AlertIcon } from '@chakra-ui/alert';
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Button, Container } from '@chakra-ui/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import styles from './productImagesSwiper.module.css';
 
 export const ProductImagesSwiper = ({ additionalImages }: Pick<ProductData, 'additionalImages'>) => {
+
+  const router = useRouter();
 
   const imgArr = additionalImages.data && additionalImages.data.map((img) => img.attributes.url);
 
@@ -30,7 +35,13 @@ export const ProductImagesSwiper = ({ additionalImages }: Pick<ProductData, 'add
 
 
   return (
-    <Container width='350px' className={styles.test} height='100%'>
+    <Container width='350px' className={styles.test} height='100%' position='relative'>
+      <Box zIndex='10'>
+        <Button display='flex' variant='outline' justifyContent='space-between' size='lg' onClick={() => router.back()}>
+          <AiOutlineArrowLeft />
+          Return
+        </Button>
+      </Box>
       {
         additionalImages.data ?
           <Slider {...settings} >
@@ -47,7 +58,6 @@ export const ProductImagesSwiper = ({ additionalImages }: Pick<ProductData, 'add
             Seems like this product haven`t got additional images
           </Alert>
       }
-
     </Container>
   );
 };

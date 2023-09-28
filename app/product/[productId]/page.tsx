@@ -16,7 +16,6 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
     <div className={styles.test}>
       <div className={styles.productPageWrapper}>
         <div className={styles.container}>
-          <>
             <div className={styles.leftSide}>
               <ProductImagesSwiper additionalImages={product.data.attributes.additionalImages} />
             </div>
@@ -26,7 +25,6 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
             <div className={styles.addToCart}>
               {session && <AddToCart id={product.data.id} attributes={product.data.attributes} />}
             </div>
-          </>
         </div>
       </div>
     </div>

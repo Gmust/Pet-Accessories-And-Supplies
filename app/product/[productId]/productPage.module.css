@@ -1,7 +1,6 @@
 
-.test{
+.test {
     background-color: #8D9AF8;
-    height: 100vh;
 }
 
 .productPageWrapper {
@@ -14,7 +13,7 @@
 .container {
     display: flex;
     margin-top: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 100px;
     width: 100%;
 }
 
@@ -25,6 +24,7 @@
     background-color: #E3E5FA;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
+
 }
 
 .rightSide {
@@ -32,7 +32,6 @@
     display: flex;
     background-color: #FAF9F6;
     width: 100%;
-    height: 100%;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
 }
@@ -48,9 +47,9 @@
 }
 
 .addToCart {
+    display: flex;
     width: 57%;
     position: fixed;
-    display: flex;
     justify-content: center;
     margin-bottom: 40px;
     bottom: 0;
@@ -58,22 +57,26 @@
 }
 
 
-@media screen and (max-width: 800px){
-    .container{
+@media screen and (max-width: 800px) {
+    .container {
         display: flex;
         flex-direction: column;
         margin-top: 0px;
         margin-bottom: 0px;
     }
+
     .leftSide {
         border-bottom-left-radius: 0px;
         border-top-left-radius: 0px;
     }
+
     .rightSide {
-        border-bottom-right-radius:0px;
+        border-bottom-right-radius: 0px;
         border-top-right-radius: 0px;
+        margin-bottom: 100px;
     }
+
     .addToCart {
-        width:100%;
+        width: 100%;
     }
 }

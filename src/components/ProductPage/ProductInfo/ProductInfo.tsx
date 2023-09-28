@@ -1,5 +1,6 @@
 'use client';
 
+import { ProductData } from '@/types';
 import { Alert, AlertIcon } from '@chakra-ui/alert';
 import { Badge, Divider, Flex, Heading, HStack, Kbd, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import React from 'react';
