@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Session } from 'next-auth';
-import { redirect, useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsSignpost2 } from 'react-icons/bs';
@@ -37,13 +37,8 @@ export const OrderForm = ({ session }: { session: Session }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   if (!order) redirect('/shop');
   const { handleSubmit, register, setError, formState: { errors } } = useForm<OrderFormInputs>({ mode: 'onBlur' });
-  const router = useRouter();
-  console.log(cart?.data.attributes.products.data.map((item) => {
-    return {
-      price: item.attributes.stripeId,
-      quantity: 1,
-    };
-  }),)
+
+
   const onSubmit = async ({ city, country, address }: OrderFormInputs) => {
     setIsLoading(true);
     try {
@@ -51,7 +46,8 @@ export const OrderForm = ({ session }: { session: Session }) => {
         userId: session.user.id,
         jwt: session.user.jwt!,
         order: {
-          products: order.attributes.products,
+          // @ts-ignore
+          products: order.attributes.products.data,
           amount: order.attributes.products.data.length!,
           country: country,
           address: address,
@@ -61,8 +57,6 @@ export const OrderForm = ({ session }: { session: Session }) => {
         },
       });
       await cartService.updateCartProducts(session.user.jwt!, [], cart?.data.id!);
-
-      // router.push(`order/confirm?userId=${session.user.id}`);
       const stripe = await stripePromise;
       // @ts-ignore
       const { error } = await stripe?.redirectToCheckout({
@@ -73,10 +67,9 @@ export const OrderForm = ({ session }: { session: Session }) => {
           };
         }),
         mode: 'payment',
-        successUrl: `http://localhost:3000/order/confirm?${session.user.id}`,
-        cancelUrl: 'https://example.com/cancel',
+        successUrl: `http://localhost:3000/order/confirm?userId=${session.user.id}`,
+        cancelUrl: `http://localhost:3000/order/cancel?orderId=${res.data.id}`,
       });
-      console.log('----=================------------============', error);
     } catch (e) {
       console.log(e);
     } finally {
