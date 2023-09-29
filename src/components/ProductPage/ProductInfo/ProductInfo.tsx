@@ -1,10 +1,10 @@
 'use client';
 
+import { RatingPopover } from '@/src/components/ProductPage/ProductInfo/RatingPopover';
 import { ProductData } from '@/types';
 import { Alert, AlertIcon } from '@chakra-ui/alert';
-import { Badge, Divider, Flex, Heading, HStack, Kbd, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { Badge, Divider, Flex, Heading, Kbd, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import React from 'react';
-import { FaStar } from 'react-icons/fa';
 import { FcRegisteredTrademark } from 'react-icons/fc';
 
 
@@ -45,25 +45,7 @@ export const ProductInfo = ({
       <Flex mt='1' justify='space-between'>
         <Badge colorScheme='green' variant='outline'>{product_type.data.attributes.name}</Badge>
         <Divider orientation='vertical' colorScheme='facebook' variant='solid' />
-        <HStack spacing='2'>
-          <Flex>
-            {
-              starsArr.length ? starsArr.map((value, index) =>
-                  <FaStar style={{ color: 'yellow' }} key={index} />,
-                )
-                :
-                <>
-                  <FaStar style={{ color: 'gray' }} />
-                  <FaStar style={{ color: 'gray' }} />
-                  <FaStar style={{ color: 'gray' }} />
-                  <FaStar style={{ color: 'gray' }} />
-                  <FaStar style={{ color: 'gray' }} />
-                </>
-            }
-          </Flex>
-          {productSummaryRating && <Text>{productSummaryRating}</Text>}
-          <Text>({reviews.data.length} reviews)</Text>
-        </HStack>
+        <RatingPopover starsArr={starsArr} productSummaryRating={productSummaryRating} reviews={reviews} />
       </Flex>
       <Flex direction='column'>
         <Heading size='md' marginTop='3'>

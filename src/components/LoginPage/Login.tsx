@@ -73,7 +73,7 @@ export const Login = () => {
     <Flex
       align={'center'}
       justify={'center'}
-      height='100vh'
+      height='92vh'
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Box
