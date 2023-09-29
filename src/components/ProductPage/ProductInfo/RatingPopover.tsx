@@ -1,3 +1,4 @@
+import { LeaveReviewDrawer } from '@/src/components/ProductPage/ProductInfo/LeaveReviewDrawer';
 import { ReviewCard } from '@/src/components/ProductPage/ProductInfo/ReviewCard';
 import { UnauthorizedAlert } from '@/src/shared/UnauthorizedAlert';
 import { Reviews } from '@/types';
@@ -21,10 +22,11 @@ import { FaStar } from 'react-icons/fa';
 interface RatingPopoverParams {
   starsArr: any[],
   productSummaryRating: number,
-  reviews: Reviews
+  reviews: Reviews,
+  productId: number
 }
 
-export const RatingPopover = ({ starsArr, reviews, productSummaryRating }: RatingPopoverParams) => {
+export const RatingPopover = ({ starsArr, reviews, productSummaryRating, productId }: RatingPopoverParams) => {
 
   const { data: session } = useSession();
   const { onClose: onAlertClose, onOpen: onAlertOpen, isOpen: isAlertOpen } = useDisclosure();
@@ -76,6 +78,7 @@ export const RatingPopover = ({ starsArr, reviews, productSummaryRating }: Ratin
         </PopoverContent>
       </Popover>
       <UnauthorizedAlert onClose={onAlertClose} onOpen={onAlertOpen} isOpen={isAlertOpen} />
+      <LeaveReviewDrawer isOpen={isDrawerOpen} onClose={onDrawerClose} onOpen={onDrawerOpen} productId={productId} />
     </>
   );
 };

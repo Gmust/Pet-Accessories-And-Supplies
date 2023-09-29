@@ -77,6 +77,11 @@ interface Review {
   }
 }
 
+interface ReviewResponse {
+  data: Review,
+  meta: {}
+}
+
 interface Reviews {
   data: Review[];
 }

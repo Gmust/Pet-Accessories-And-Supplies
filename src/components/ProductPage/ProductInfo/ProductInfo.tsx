@@ -16,7 +16,8 @@ export const ProductInfo = ({
                               name,
                               price,
                               description,
-                            }: ProductData) => {
+                              id,
+                            }: ProductData & { id: number }) => {
 
   const productSummaryRating = Math.round((reviews.data.reduce((previousValue, currentValue) => previousValue + currentValue.attributes.rating, 0) / reviews.data.length) * 10) / 10;
   const starsArr = [];
@@ -45,7 +46,7 @@ export const ProductInfo = ({
       <Flex mt='1' justify='space-between'>
         <Badge colorScheme='green' variant='outline'>{product_type.data.attributes.name}</Badge>
         <Divider orientation='vertical' colorScheme='facebook' variant='solid' />
-        <RatingPopover starsArr={starsArr} productSummaryRating={productSummaryRating} reviews={reviews} />
+        <RatingPopover starsArr={starsArr} productSummaryRating={productSummaryRating} reviews={reviews} productId={id} />
       </Flex>
       <Flex direction='column'>
         <Heading size='md' marginTop='3'>
