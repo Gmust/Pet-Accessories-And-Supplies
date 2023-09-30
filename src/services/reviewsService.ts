@@ -1,5 +1,5 @@
 import { $authHost } from '@/src/services/index';
-import { ReviewResponse } from '@/types';
+import { ReviewResponse, UserReviews } from '@/types';
 
 interface CreateReview {
   jwt: string,
@@ -24,5 +24,13 @@ export const reviewsService = {
       },
     });
     return data;
+  },
+  async getAllUserReviews(jwt: string, userId: number) {
+    const { data } = await $authHost.get<UserReviews>(`reviews?filters[user][id]=${userId}&populate=deep,2`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+    return data
   },
 };

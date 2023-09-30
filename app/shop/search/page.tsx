@@ -33,7 +33,6 @@ const getGoodsByFilter = async ({ searchParams }: SearchParams) => {
       customName: 'product_type',
       type: 'firstArg',
     }));
-
   }
   if (brandOpts.length > 0 && product_typesOpts.length > 0) {
     const firstPart = queryStringGenerator({
@@ -50,7 +49,6 @@ const getGoodsByFilter = async ({ searchParams }: SearchParams) => {
   }
   if (!query) query = '';
   try {
-    console.log(query);
     const res = await goodsService.getProductsByFilters(`${query}&${minValQuery}&${maxValQuery}`);
     return res;
   } catch (e) {

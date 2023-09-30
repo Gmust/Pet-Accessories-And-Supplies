@@ -18,6 +18,7 @@ export const ProductCartContent = ({ cart }: ProductCartProps) => {
       (accumulator, currentValue) => accumulator + currentValue.attributes.price, 0);
   }
 
+  console.log(cart);
   return (
     <>
       <VStack spacing='4'>

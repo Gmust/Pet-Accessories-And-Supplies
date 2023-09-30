@@ -68,7 +68,7 @@ export const Header = () => {
       <Flex alignItems='center' justifyContent='space-between'
             display={{ md: 'flex', base: 'none' }} marginRight={3}>
         {
-          session ?
+          session?.user.jwt ?
             <Flex flexDirection='column' marginRight={6} alignItems='center'>
               <UserIcon id={session.user.id} email={session.user.email} />
             </Flex>
@@ -96,7 +96,7 @@ export const Header = () => {
           <PopoverContent>
             <PopoverArrow />
             <PopoverCloseButton />
-            <PopoverBody  maxHeight='500px' overflow='auto'>
+            <PopoverBody maxHeight='500px' overflow='auto'>
               <Cart />
             </PopoverBody>
           </PopoverContent>

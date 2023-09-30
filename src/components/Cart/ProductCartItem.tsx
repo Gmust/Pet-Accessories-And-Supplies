@@ -70,7 +70,7 @@ export const ProductCartItem = ({ item }: ProductCartItemProps) => {
       <SmallProductCard key={item.id} brand={item.attributes.brand} name={item.attributes.name}
                         product_type={item.attributes.product_type}
                         coverPicture={item.attributes.coverPicture}
-                        reviews={item.attributes.reviews} price={item.attributes.price} id={item.id} />
+                        reviews={item.attributes.reviews} price={item.attributes.price} id={item.id}  stripeId={item.attributes.stripeId}/>
     </div>
   );
 };

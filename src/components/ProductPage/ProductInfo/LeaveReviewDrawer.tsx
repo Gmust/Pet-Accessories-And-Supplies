@@ -15,7 +15,6 @@ export const LeaveReviewDrawer = ({ onOpen, isOpen, onClose, productId }: LeaveR
 
   const firstField = React.useRef();
 
-
   return (
     <Drawer
       isOpen={isOpen}

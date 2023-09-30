@@ -73,8 +73,21 @@ interface Review {
   attributes: {
     text: string,
     rating: number,
-    createdAt: string
+    createdAt: string,
+    user: {
+      data: {
+        id: number,
+        attributes: User
+      }
+    },
+    product: {
+      data: Product
+    }
   }
+}
+
+interface UserReviews {
+  data: Review[];
 }
 
 interface ReviewResponse {
@@ -189,3 +202,35 @@ interface CreatedOrderResponse {
   data: OrderData,
   meta: {}
 }
+
+
+interface RegisterUser {
+  email: string,
+  username: string,
+  password: string
+}
+
+interface LoginUser {
+  identifier: string,
+  password: string
+}
+
+interface AuthResponse {
+  jwt: string,
+  user: User
+}
+
+interface User {
+  blocked: boolean,
+  confirmed: boolean,
+  createdAt: Date,
+  id: number,
+  username: string
+  email: string
+  updatedAt: Date,
+  reviews: [],
+  cart?: Cart,
+  jwt?: string
+  orders?: Order[]
+}
+
