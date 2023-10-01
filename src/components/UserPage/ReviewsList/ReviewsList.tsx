@@ -2,15 +2,15 @@
 
 import { ReviewCard } from '@/src/components/UserPage/ReviewsList/ReviewCard';
 import { UserReviews } from '@/types';
-import { Flex } from '@chakra-ui/react';
+import { Flex, SimpleGrid } from '@chakra-ui/react';
 
 export const ReviewsList = ({ reviews }: { reviews: UserReviews }) => {
   return (
-    <Flex flexWrap='wrap' >
+    <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
       {reviews.data.map((review) =>
         <ReviewCard review={review} />,
       )}
-    </Flex>
+    </SimpleGrid>
   );
 };
 

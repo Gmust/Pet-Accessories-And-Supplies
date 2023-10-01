@@ -1,30 +1,21 @@
 
 .userPageWrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas:
-    "account-info  orders-list orders-list orders-list"
-    "account-info  orders-list orders-list orders-list"
-    "account-info  reviews-list reviews-list reviews-list"
-    "account-info  reviews-list reviews-list reviews-list";
+    display: flex;
 }
 
 
 .accountInfo {
-    grid-area: account-info;
+    justify-content: center;
+    align-content: center;
 }
 
-.ordersList {
-    grid-area: orders-list;
+.content {
     display: flex;
     margin-top: 5%;
+    width: 80%;
+
 }
 
-.reviewsList {
-    grid-area: reviews-list;
-}
 
 .orderAlert {
     width: 100vw;

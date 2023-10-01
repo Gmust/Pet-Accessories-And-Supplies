@@ -10,8 +10,9 @@ import { MdOutlinePets } from 'react-icons/md';
 export const Footer = () => {
   return (
     <Flex justify='space-between' align='center' as='footer' flexDirection={{ base: 'column', md: 'row' }}
-          bg='#7e8adf' color='white' bottom={0} right={0} left={0}  position='absolute' width='full' padding={{ base: '5', md: '1' }}
-        >
+          bg='#7e8adf' color='white' bottom={0} right={0} left={0} position='relative' width='full'
+          padding={{ base: '5', md: '1' }}
+    >
       <Box display={{ base: 'flex', md: 'inline' }} alignItems='center'>
         <Flex align='center' mr={5}>
           <Heading as='h1' size='lg' letterSpacing={'tighter'}>

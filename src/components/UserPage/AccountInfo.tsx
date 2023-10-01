@@ -1,5 +1,6 @@
 'use client';
 
+import { User } from '@/types';
 import { Avatar, Box, Flex, Text, VStack } from '@chakra-ui/react';
 import { LiaUserCircleSolid } from 'react-icons/lia';
 

@@ -1,6 +1,7 @@
 import { Review } from '@/types';
-import { Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react';
-import React from 'react';
+import { Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading, Text, Textarea } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
 
 interface ReviewCard {
   review: Review;
@@ -8,20 +9,51 @@ interface ReviewCard {
 
 export const ReviewCard = ({ review }: ReviewCard) => {
 
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  const [reviewText, setReviewText] = useState<string>(review.attributes.text);
+
   return (
-    <VStack borderRadius='md' border='1px solid gray' margin={2} width='400px' p={2}>
-      <HStack>
-        <Heading fontSize='md'>Product name:</Heading>
-        <Text fontSize='md'>{review.attributes.product.data.attributes.name}</Text>
-      </HStack>
-      <VStack>
-        <Flex>
-          <Text textAlign='left' fontSize='md'>Review text:</Text>
-          <Text fontSize='md' noOfLines={[1, 2]}>{review.attributes.text}</Text>
-        </Flex>
-        <Text fontSize='md'>{new Date(review.attributes.createdAt).toLocaleDateString()}</Text>
-      </VStack>
-    </VStack>
+    <Card>
+      <CardHeader>
+        <Heading size='md'>{review.attributes.product.data.attributes.name}</Heading>
+      </CardHeader>
+      <CardBody display='flex' flexDirection='column' justifyContent='space-around'>
+        {
+          isEditing ?
+            <>
+              <Textarea value={reviewText} resize='none'/>
+
+            </>
+            :
+            <>
+              <Text noOfLines={isOpened ? [10] : [3]} onClick={() => setIsOpened(!isOpened)}>
+                {review.attributes.text}
+              </Text>
+              <Flex align='center'>
+                <Text fontSize='xl'>
+                  {review.attributes.rating}/5
+                </Text>
+                <FaStar style={{ color: 'yellow', marginLeft: '5px', fontSize: '22px' }} />
+              </Flex>
+            </>
+        }
+      </CardBody>
+      <CardFooter>
+        {
+          isEditing ?
+            <Flex justifyContent='space-between' align='center' w='full'>
+              <Button colorScheme='green' variant='ghost'>Save</Button>
+              <Button colorScheme='red' onClick={() => setIsEditing(false)} variant='ghost'>
+                Cancel
+              </Button>
+            </Flex>
+            :
+            <Button onClick={() => setIsEditing(true)}>Manage review</Button>
+        }
+      </CardFooter>
+    </Card>
   );
 };
 
