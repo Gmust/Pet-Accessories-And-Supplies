@@ -33,7 +33,6 @@ export const Orders = ({ order }: OrdersProps) => {
       {
         order.map((item) => {
           return (
-            <>
               <Tr key={item.id}>
                 <Td>{item.attributes.address}</Td>
                 <Td>{item.attributes.city}</Td>
@@ -73,7 +72,6 @@ export const Orders = ({ order }: OrdersProps) => {
                   }
                 </Td>
               </Tr>
-            </>
           );
         })
       }

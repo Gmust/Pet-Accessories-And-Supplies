@@ -103,7 +103,7 @@ export const FiltersBar = ({ brands, productTypes }: FiltersBarProps) => {
                 value={[minValue, maxValue]}
                 focusThumbOnChange={false}
                 onChange={(val) => {
-                  console.log(val);
+
                   handleMinValueChange(val[0]);
                   handleMaxValueChange(val[1]);
                 }}

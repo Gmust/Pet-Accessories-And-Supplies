@@ -17,10 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-    <body >
+    <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
     <Providers>
       <Header />
-      <div id='content'>
+      <div>
         {children}
       </div>
       <Footer />

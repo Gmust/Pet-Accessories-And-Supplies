@@ -1,6 +1,6 @@
 'use client';
 
-import { LoginUser } from '@/types/auth';
+import { LoginUser } from '@/types';
 import { Link } from '@chakra-ui/next-js';
 import {
   Box,

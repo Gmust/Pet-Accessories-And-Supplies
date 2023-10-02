@@ -3,6 +3,7 @@
 import { reviewsService } from '@/src/services/reviewsService';
 import { Box, Button, Textarea, useToast, VStack } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
@@ -22,6 +23,7 @@ export const LeaveReviewForm = ({ productId, onClose }: LeaveReviewFormProps) =>
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const toast = useToast();
+  const router = useRouter();
 
   const handleSubmitReview = async () => {
     setIsLoading(true);
@@ -43,6 +45,7 @@ export const LeaveReviewForm = ({ productId, onClose }: LeaveReviewFormProps) =>
         description: 'Your review has been added',
         status: 'success',
       });
+      router.refresh();
     } catch (e) {
       toast({
         title: 'Error',

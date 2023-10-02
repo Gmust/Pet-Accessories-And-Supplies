@@ -23,29 +23,8 @@ interface UserPageContentProps {
 
 export const UserPageContent = ({ userReviews, ordersResponse }: UserPageContentProps) => {
   return (
-    // <>
-    //   <div>
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //   </div>
-    //   <div>
-    //
-    //
-    //
-    //
-    //
-    //
-    //   </div>
-    //   ;
-    // </>
-    <Accordion defaultIndex={[0]} allowMultiple width='full'>
-      <VStack spacing='12' >
+    <Accordion defaultIndex={[0]} allowMultiple width={['380px','md', 'full']}>
+      <VStack spacing='12'>
         <AccordionItem w='full'>
           <h2>
             <AccordionButton>
@@ -71,7 +50,7 @@ export const UserPageContent = ({ userReviews, ordersResponse }: UserPageContent
           <h2>
             <AccordionButton>
               <Box as='span' flex='1' textAlign='left'>
-                <Text fontSize='xl'>  Your reviews</Text>
+                <Text fontSize='xl'> Your reviews</Text>
               </Box>
               <AccordionIcon />
             </AccordionButton>

@@ -2,6 +2,7 @@
 
 import { FiltersBar } from '@/src/components/ShopPage/FiltersBar/FiltersBar';
 import { goodsService } from '@/src/services/goodsService';
+import { BrandsResponse, ProductTypesResponse } from '@/types';
 import { GoodsOption } from '@/types/react-select';
 import {
   Box,

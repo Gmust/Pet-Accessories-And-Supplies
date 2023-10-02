@@ -1,5 +1,6 @@
 import { LeaveReviewDrawer } from '@/src/components/ProductPage/ProductInfo/LeaveReviewDrawer';
 import { ReviewCard } from '@/src/components/ProductPage/ProductInfo/ReviewCard';
+import { reviewsService } from '@/src/services/reviewsService';
 import { UnauthorizedAlert } from '@/src/shared/UnauthorizedAlert';
 import { Reviews } from '@/types';
 import {
@@ -14,6 +15,7 @@ import {
   PopoverTrigger,
   Text,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import React from 'react';
@@ -31,12 +33,31 @@ export const RatingPopover = ({ starsArr, reviews, productSummaryRating, product
   const { data: session } = useSession();
   const { onClose: onAlertClose, onOpen: onAlertOpen, isOpen: isAlertOpen } = useDisclosure();
   const { onClose: onDrawerClose, onOpen: onDrawerOpen, isOpen: isDrawerOpen } = useDisclosure();
+  const toast = useToast();
 
-  const handleClickLeaveReview = () => {
+  const handleClickLeaveReview = async () => {
     if (!session) {
       onAlertOpen();
     } else if (session) {
-      onDrawerOpen();
+      try {
+        const res = await reviewsService.getAllUserReviews(session.user.jwt!, session.user.id);
+        if (res.data.filter((item) => item.attributes.product.data.id === productId).length > 0) {
+          toast({
+            status: 'warning',
+            title: 'Unable to perform this action',
+            description: 'You have already left review for this product, check your account to manage it',
+          });
+          return;
+        } else {
+          onDrawerOpen();
+        }
+      } catch (e) {
+        toast({
+          title: 'Error',
+          description: 'Something went wrong, try again later',
+          status: 'error',
+        });
+      }
     }
   };
 

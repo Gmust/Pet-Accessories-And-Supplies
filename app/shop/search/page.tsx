@@ -12,13 +12,7 @@ interface SearchParams {
   };
 }
 
-const getGoodsByFilter = async ({ searchParams }: SearchParams) => {
-  const { brands, product_types, price } = searchParams;
-  const brandOpts = brands ? brands.split('.') : [];
-  const product_typesOpts = product_types ? product_types.split('.') : [];
-  const priceArr = price.split('.');
-  const minValQuery = generatePriceQueryString({ minPrice: priceArr[0] });
-  const maxValQuery = generatePriceQueryString({ maxPrice: priceArr[1] });
+const selectSuitableQuery = (brandOpts: string[], product_typesOpts: string[]) => {
   let query: string = '';
   if (brandOpts.length > 0 && product_typesOpts.length <= 0) {
     query = (queryStringGenerator({
@@ -40,13 +34,27 @@ const getGoodsByFilter = async ({ searchParams }: SearchParams) => {
       customName: 'brand',
       type: 'firstArg',
     });
-    const secondPart = await queryStringGenerator({
+    const secondPart = queryStringGenerator({
       queryValues: product_typesOpts,
       customName: 'product_type',
       type: 'secondArg',
     });
     query = `${firstPart}&${secondPart}`;
   }
+  return query;
+};
+
+const getGoodsByFilter = async ({ searchParams }: SearchParams) => {
+  const { brands, product_types, price } = searchParams;
+
+  const brandOpts = brands ? brands.split('.') : [];
+  const product_typesOpts = product_types ? product_types.split('.') : [];
+  const priceArr = price.split('.');
+
+  const minValQuery = generatePriceQueryString({ minPrice: priceArr[0] });
+  const maxValQuery = generatePriceQueryString({ maxPrice: priceArr[1] });
+
+  let query = selectSuitableQuery(brandOpts, product_typesOpts);
   if (!query) query = '';
   try {
     const res = await goodsService.getProductsByFilters(`${query}&${minValQuery}&${maxValQuery}`);

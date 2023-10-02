@@ -228,7 +228,7 @@ interface User {
   username: string
   email: string
   updatedAt: Date,
-  reviews: [],
+  reviews: Reviews,
   cart?: Cart,
   jwt?: string
   orders?: Order[]

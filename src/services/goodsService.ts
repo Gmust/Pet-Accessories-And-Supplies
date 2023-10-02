@@ -47,7 +47,7 @@ export const goodsService = {
     }
   },
   async getProductsByFilters(query: string) {
-    console.log(query);
+
     try {
       const { data } = await $unAuthHost.get<GoodsResponse>(`/products?${query}&populate=coverPicture&populate=reviews&populate=brand`);
       return data;

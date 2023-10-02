@@ -1,4 +1,5 @@
 import { $authHost, $unAuthHost } from '@/src/services/index';
+import { AuthResponse, LoginUser, RegisterUser, User } from '@/types';
 
 export const authService = {
   async registerUser({ password, username, email }: RegisterUser) {

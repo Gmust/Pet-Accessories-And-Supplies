@@ -1,6 +1,7 @@
 
 .userPageWrapper {
     display: flex;
+    min-height: 100vh;
 }
 
 
@@ -13,7 +14,6 @@
     display: flex;
     margin-top: 5%;
     width: 80%;
-
 }
 
 
@@ -25,6 +25,7 @@
     .userPageWrapper {
         display: flex;
         flex-direction: column;
+        align-items: center;
         height: 100vh;
     }
 }
