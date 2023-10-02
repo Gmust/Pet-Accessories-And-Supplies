@@ -9,6 +9,14 @@ interface CreateReview {
   rating: number
 }
 
+interface UpdateReview {
+  jwt: string,
+  text: string,
+  rating: number,
+  productId: number,
+  reviewId: number
+}
+
 export const reviewsService = {
   async createReview({ product, rating, user, text, jwt }: CreateReview) {
     const { data } = await $authHost.post<ReviewResponse>('reviews', {
@@ -31,6 +39,19 @@ export const reviewsService = {
         Authorization: `Bearer ${jwt}`,
       },
     });
-    return data
+    return data;
+  },
+  async updateReview({ productId, text, jwt, rating, reviewId }: UpdateReview) {
+    const { data } = await $authHost.put(`reviews/${reviewId}`, {
+      data: {
+        text,
+        rating,
+        product: productId,
+      },
+    }, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
   },
 };
