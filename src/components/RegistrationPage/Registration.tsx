@@ -2,7 +2,7 @@
 
 import { authService } from '@/src/services/authService';
 import { cartService } from '@/src/services/cartService';
-import { RegisterUser } from '@/types/auth';
+import { RegisterUser } from '@/types';
 import {
   Box,
   Button,
@@ -28,7 +28,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiHide, BiShow } from 'react-icons/bi';
 
-export const Registration = () => {
+interface RegistrationProps {
+  onSubmitTest?: () => void;
+}
+
+
+export const Registration = ({ onSubmitTest }: RegistrationProps) => {
 
   const {
     register, handleSubmit, formState: { errors, isLoading, isSubmitting }, reset,
@@ -77,7 +82,7 @@ export const Registration = () => {
           <Heading fontSize={'4xl'} textAlign={'center'}>
             Sign up
           </Heading>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={onSubmitTest ? handleSubmit(onSubmitTest) : handleSubmit(onSubmit)}>
             <VStack>
               <FormControl isInvalid={!!errors.email}>
                 <FormLabel htmlFor='email'>Email</FormLabel>
@@ -121,10 +126,11 @@ export const Registration = () => {
                       minLength: { value: 4, message: 'Minimum length should be 8' },
                       pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/,
                     })}
+                    data-testid='password'
                   />
                   <InputRightElement h={'full'}>
                     <Button
-                      variant={'ghost'}
+                      variant={'ghost'} data-testid='show-password'
                       onClick={() => setShowPassword((showPassword) => !showPassword)}>
                       <Text fontSize='xl'>
                         {showPassword ? <BiShow /> : <BiHide />}
@@ -144,7 +150,7 @@ export const Registration = () => {
                 </FormErrorMessage>
               </FormControl>
             </VStack>
-            <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
+            <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit' data-testid='submit-form'>
               Submit
             </Button>
           </form>
