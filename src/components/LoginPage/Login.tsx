@@ -21,12 +21,17 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiHide, BiShow } from 'react-icons/bi';
 
-export const Login = () => {
+interface LoginProps {
+  onSubmitTest?: () => void;
+}
+
+
+export const Login = ({ onSubmitTest }: LoginProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
   const {
@@ -36,7 +41,6 @@ export const Login = () => {
     setError,
   } = useForm<LoginUser>({ mode: 'onBlur' });
   const toast = useToast();
-  const router = useRouter();
 
   const onSubmit = async ({ identifier, password }: LoginUser) => {
     if (!identifier) return setError('identifier', { type: 'required', message: 'Provide email or username' });
@@ -62,7 +66,7 @@ export const Login = () => {
           description: 'Successfully logged in',
           status: 'success',
         });
-        router.push('/shop');
+        redirect('/shop');
       }
     } catch (e) {
       console.log(e);
@@ -85,12 +89,12 @@ export const Login = () => {
           <Heading fontSize={'4xl'} textAlign={'center'}>
             Sign in
           </Heading>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={onSubmitTest ? handleSubmit(onSubmitTest) : handleSubmit(onSubmit)}>
             <VStack>
               <FormControl isInvalid={!!errors.identifier}>
-                <FormLabel htmlFor='identifier'>Email of Username</FormLabel>
+                <FormLabel htmlFor='identifier'>Email or Username</FormLabel>
                 <Input
-                  id='identifier'
+                  id='identifier' data-testid='identifier'
                   placeholder='example@gmail.com or coolUsername'
                   {...register('identifier', {
                     required: 'Identifier is required',
@@ -105,7 +109,7 @@ export const Login = () => {
                 <FormLabel htmlFor='password'>Password</FormLabel>
                 <InputGroup>
                   <Input
-                    id='password'
+                    id='password' data-testid='password'
                     placeholder='***********'
                     type={showPassword ? 'text' : 'password'}
                     {...register('password', {
@@ -114,7 +118,7 @@ export const Login = () => {
                   />
                   <InputRightElement h={'full'}>
                     <Button
-                      variant={'ghost'}
+                      variant={'ghost'} data-testid='show-password'
                       onClick={() => setShowPassword((showPassword) => !showPassword)}>
                       <Text fontSize='xl'>
                         {showPassword ? <BiShow /> : <BiHide />}
@@ -127,7 +131,7 @@ export const Login = () => {
                 </FormErrorMessage>
               </FormControl>
             </VStack>
-            <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
+            <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit' data-testid='submit-form'>
               Submit
             </Button>
           </form>

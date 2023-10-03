@@ -13,7 +13,6 @@ import {
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverHeader,
   PopoverTrigger,
   Portal,
 } from '@chakra-ui/react';
@@ -82,7 +81,7 @@ export const SearchBar = ({ brands, productTypes }: SearchBarProps) => {
         <Popover>
           <PopoverTrigger>
             <Button>
-              <RiFilterFill style={{fontSize: '20px'}}/>
+              <RiFilterFill style={{ fontSize: '20px' }} />
             </Button>
           </PopoverTrigger>
           <Portal>
