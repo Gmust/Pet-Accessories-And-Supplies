@@ -45,7 +45,6 @@ export const HeaderDrawer = ({ btnRef, onClose, isOpen }: HeaderDrawerProps) => 
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader>Available pages</DrawerHeader>
-
         <DrawerBody>
           <Navbar onClose={onClose} />
           <Link href={`/user/${session?.user.id!}`} onClick={onClose}>

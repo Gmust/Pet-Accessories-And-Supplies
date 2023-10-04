@@ -1,6 +1,5 @@
 import { $authHost } from '@/src/services/index';
-import { CartResponse, Product } from '@/types';
-import { User } from '@/types/auth';
+import { CartResponse, Product, User } from '@/types';
 
 export const cartService = {
   async createCart(userId: number) {

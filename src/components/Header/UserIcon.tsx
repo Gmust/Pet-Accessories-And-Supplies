@@ -20,6 +20,7 @@ export const UserIcon = ({ email, id }: UserIcon) => {
         aria-label='Options'
         icon={<RxAvatar style={{ fontSize: '36px' }} />}
         variant='unstyled'
+        data-testid='user-icon-inside'
       />
       <MenuList>
         <MenuGroup title={email}>
