@@ -39,6 +39,7 @@ export const HeaderDrawer = ({ btnRef, onClose, isOpen }: HeaderDrawerProps) => 
       placement='right'
       onClose={onClose}
       finalFocusRef={btnRef}
+      data-testid='drawer'
     >
       <DrawerOverlay />
       <DrawerContent>

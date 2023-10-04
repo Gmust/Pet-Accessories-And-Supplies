@@ -47,7 +47,7 @@ export const Header = () => {
     >
       <Link href='/'>
         <Flex align='center' mr={5}>
-          <Heading as='h1' size='lg' letterSpacing={'tighter'}>
+          <Heading as='h1' size='lg' letterSpacing={'tighter'} data-testid='logo'>
             PawShop
           </Heading>
           <MdOutlinePets style={{ fontSize: '32px', marginLeft: '8px' }} />
@@ -56,7 +56,7 @@ export const Header = () => {
 
       <Flex display={{ base: 'flex', md: 'none' }}>
         <Text fontSize='2xl'>
-          <GiHamburgerMenu ref={btnRef} onClick={onOpen} />
+          <GiHamburgerMenu ref={btnRef} onClick={onOpen} data-testid='hamburger-menu' />
         </Text>
         <HeaderDrawer isOpen={isOpen} onClose={onClose} btnRef={btnRef} />
       </Flex>
@@ -69,12 +69,14 @@ export const Header = () => {
             display={{ md: 'flex', base: 'none' }} marginRight={3}>
         {
           session?.user.jwt ?
-            <Flex flexDirection='column' marginRight={6} alignItems='center'>
+            <Flex flexDirection='column' marginRight={6} alignItems='center'
+                  data-testid={'user-icon'}
+            >
               <UserIcon id={session.user.id} email={session.user.email} />
             </Flex>
             :
             <Button colorScheme='yellow' variant='solid' marginRight={6}
-                    onClick={() => router.push('/login')}
+                    onClick={() => router.push('/login')} data-testid={'create-account'}
             >
               <Flex>
                 <Text>
@@ -89,11 +91,11 @@ export const Header = () => {
         }
         <Popover>
           <PopoverTrigger>
-            <Button variant='unstyled'>
+            <Button variant='unstyled'  data-testid='cart-popover-button'>
               <TfiShoppingCart style={{ fontSize: '30px', cursor: 'pointer' }} />
             </Button>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent data-testid='cart-popover'>
             <PopoverArrow />
             <PopoverCloseButton />
             <PopoverBody maxHeight='500px' overflow='auto'>

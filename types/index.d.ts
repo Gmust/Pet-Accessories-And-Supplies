@@ -118,7 +118,7 @@ interface ProductTypes {
 interface BrandsResponse {
   data: BrandData[];
   meta: {
-    pagination: {
+    pagination?: {
       page: number,
       pageSize: number,
       pageCount: number,
@@ -130,7 +130,7 @@ interface BrandsResponse {
 interface ProductTypesResponse {
   data: ProductTypes[];
   meta: {
-    pagination: Pagination
+    pagination?: Pagination
   } | null;
 }
 
