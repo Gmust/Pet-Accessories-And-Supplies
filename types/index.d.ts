@@ -183,7 +183,7 @@ interface CartResponse {
   };
   meta: {
     pagination: Pagination
-  };
+  } | null
 }
 
 

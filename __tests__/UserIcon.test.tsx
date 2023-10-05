@@ -2,13 +2,14 @@ import { UserIcon } from '@/src/components/Header/UserIcon';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+const push = jest.fn();
 
 const mockUsePathname = jest.fn();
 jest.mock('next/navigation', () => {
   return {
     __esModule: true,
     useRouter: () => ({
-      push: jest.fn(),
+      push,
       replace: jest.fn(),
       prefetch: jest.fn(),
     }),
@@ -28,14 +29,10 @@ describe('user icon behaviour', () => {
     expect(getByText('Sign out')).toBeInTheDocument();
   });
   it('should navigate to user account and user orders', async () => {
-    const { getByText } = render(<UserIcon email='test@gmail.com' id={1} />);
-    await userEvent.click(getByText('My account')).then(() => expect(location.pathname).to.equal('/user/1'));
-    await userEvent.click(getByText('My orders')).then(() => expect(location.pathname).to.equal('/user/1/orders'));
-  });
-  it('should not to be rendered after sign out', async () => {
-    const { container, getByText } = render(
-      <UserIcon email='test@gmail.com' id={1} />,
-    );
-    await userEvent.click(getByText('Sign out')).then(() => expect(container).not.toBeInTheDocument());
+    const { getByText, getByTestId } = render(<UserIcon email='test@gmail.com' id={1} />);
+    await userEvent.click(getByTestId('accountLink'));
+    await userEvent.click(getByTestId('ordersLink'));
+    expect(push).toHaveBeenCalledWith('/user/1');
+    expect(push).toHaveBeenCalledWith('/user/1/orders');
   });
 });

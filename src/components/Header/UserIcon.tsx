@@ -24,8 +24,8 @@ export const UserIcon = ({ email, id }: UserIcon) => {
       />
       <MenuList>
         <MenuGroup title={email}>
-          <MenuItem onClick={() => router.push(`/user/${id}`)}>My account</MenuItem>
-          <MenuItem onClick={() => router.push(`/user/${id}/orders`)}>My orders</MenuItem>
+          <MenuItem onClick={() => router.push(`/user/${id}`)}  data-testid='accountLink'>My account</MenuItem>
+          <MenuItem onClick={() => router.push(`/user/${id}/orders`)} data-testid='ordersLink'>My orders</MenuItem>
         </MenuGroup>
         <MenuItem onClick={() => {
           signOut();

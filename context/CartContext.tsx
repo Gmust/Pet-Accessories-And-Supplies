@@ -3,7 +3,7 @@ import { CartResponse, OrderData } from '@/types';
 import { createContext, Dispatch, SetStateAction, useState } from 'react';
 
 
-interface CartContextParams {
+export interface CartContextParams {
   cart: CartResponse | null,
   setCart: Dispatch<SetStateAction<CartResponse | null>>,
   order: Pick<OrderData, 'attributes'> | null,

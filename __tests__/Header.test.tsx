@@ -7,7 +7,10 @@ jest.mock('next-auth/react', () => {
   const originalModule = jest.requireActual('next-auth/react');
   const mockSession = {
     expires: new Date(Date.now() + 2 * 86400).toISOString(),
-    user: { username: 'Steve', jwt: 'dasdsd' },
+    user: {
+      username: 'Steve',
+      jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY5NjUxNTU3OSwiZXhwIjoxNjk3MTIwMzc5fQ.4GfHdUw40QKZYn8hY0MvyFWCKPZtK91vs6qK3-HSjv0',
+    },
   };
   return {
     __esModule: true,
@@ -39,12 +42,12 @@ jest.mock('next/navigation', () => {
 
 
 describe('Header Component render', () => {
-  it('renders the logo', () => {
-    const { getByText } = render(<Header />);
+  it('renders the logo', async () => {
+    const { getByText } = await render(<Header />);
     expect(getByText('PawShop')).toBeInTheDocument();
   });
-  it('renders user icon when authenticated', () => {
-    const { getByTestId } = render(<Header />);
+  it('renders user icon when authenticated', async () => {
+    const { getByTestId } = await render(<Header />);
     expect(getByTestId('user-icon')).toBeInTheDocument();
   });
 });

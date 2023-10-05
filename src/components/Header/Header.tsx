@@ -23,16 +23,15 @@ import { FocusableElement } from '@chakra-ui/utils';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { RefObject, useRef } from 'react';
+import React, { forwardRef, RefObject, useRef } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdOutlinePets } from 'react-icons/md';
 import { TfiShoppingCart } from 'react-icons/tfi';
 
-export const Header = () => {
+export const Header = forwardRef(() => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
-  const btnRef = useRef() as RefObject<FocusableElement>;
   const { data: session } = useSession();
 
 
@@ -56,9 +55,9 @@ export const Header = () => {
 
       <Flex display={{ base: 'flex', md: 'none' }}>
         <Text fontSize='2xl'>
-          <GiHamburgerMenu ref={btnRef} onClick={onOpen} data-testid='hamburger-menu' />
+          <GiHamburgerMenu onClick={onOpen} data-testid='hamburger-menu' />
         </Text>
-        <HeaderDrawer isOpen={isOpen} onClose={onClose} btnRef={btnRef} />
+        <HeaderDrawer isOpen={isOpen} onClose={onClose} />
       </Flex>
 
       <Box display={{ base: 'none', md: 'flex' }}>
@@ -91,7 +90,7 @@ export const Header = () => {
         }
         <Popover>
           <PopoverTrigger>
-            <Button variant='unstyled'  data-testid='cart-popover-button'>
+            <Button variant='unstyled' data-testid='cart-popover-button'>
               <TfiShoppingCart style={{ fontSize: '30px', cursor: 'pointer' }} />
             </Button>
           </PopoverTrigger>
@@ -106,5 +105,5 @@ export const Header = () => {
       </Flex>
     </Flex>
   );
-};
-
+}
+)

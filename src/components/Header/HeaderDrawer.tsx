@@ -26,19 +26,17 @@ import { BiSolidUser } from 'react-icons/bi';
 interface HeaderDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  btnRef: RefObject<FocusableElement> | undefined;
 }
 
-export const HeaderDrawer = ({ btnRef, onClose, isOpen }: HeaderDrawerProps) => {
+export const HeaderDrawer = ({  onClose, isOpen }: HeaderDrawerProps) => {
   const { data: session } = useSession();
-  const router = useRouter();
+
 
   return (
     <Drawer
       isOpen={isOpen}
       placement='right'
       onClose={onClose}
-      finalFocusRef={btnRef}
       data-testid='drawer'
     >
       <DrawerOverlay />
